@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Search, Rows } from "lucide-react";
+import { Home, Search, Rows, Layers } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -16,9 +16,9 @@ export default function SidebarLinksList() {
         <li
           className={`${
             pathName === "/" ? activeLink : inactiveLink
-          } flex text-sm items-center gap-3 p-2 rounded`}
+          } flex items-center gap-4 p-2 rounded`}
         >
-          <Home size={20} />
+          <Home size={24} />
           <span className="font-bold">Home</span>
         </li>
       </Link>
@@ -27,9 +27,9 @@ export default function SidebarLinksList() {
         <li
           className={`${
             pathName === "/search" ? activeLink : inactiveLink
-          } flex items-center gap-3 p-2 text-sm rounded cursor-pointer  hover:text-white`}
+          } flex items-center gap-4 p-2 rounded cursor-pointer  hover:text-white`}
         >
-          <Search size={20} />
+          <Search size={24} />
 
           <span className="font-bold">Search</span>
         </li>
@@ -41,9 +41,9 @@ export default function SidebarLinksList() {
             pathName.includes("/collection") && !pathName.includes("tracks")
               ? activeLink
               : inactiveLink
-          } flex items-center gap-3 p-2 text-sm rounded cursor-pointer  hover:text-white`}
+          } flex items-center gap-4 p-2 rounded cursor-pointer  hover:text-white`}
         >
-          <Rows size={20} />
+          <Layers size={24} />
           <span className="font-bold">Your Library</span>
         </li>
       </Link>

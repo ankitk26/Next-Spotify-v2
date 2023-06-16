@@ -14,8 +14,8 @@ export default async function Sidebar() {
   const playlists = await getUserLikedPlaylists(session);
 
   return (
-    <aside className="fixed top-0 left-0 w-64 h-full bg-black">
-      <div className="flex flex-col items-center h-full m-5 mt-5">
+    <aside className="fixed w-64 h-full top-2 left-2">
+      <div className="flex flex-col items-center h-full p-4 rounded-md bg-paper-700">
         <Image
           src="/images/spotify_logo.png"
           width={125}
@@ -24,9 +24,9 @@ export default async function Sidebar() {
         />
 
         <SidebarLinksList />
+      </div>
 
-        <div className="w-full h-px mt-4 bg-gray"></div>
-
+      <div className="flex flex-col items-center h-full m-5 mt-2 bg-paper-700">
         <ul
           id="sidebar-playlists"
           className="flex flex-col w-full gap-3 pr-3 mt-5 overflow-x-hidden text-sm text-gray"
