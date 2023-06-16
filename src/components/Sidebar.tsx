@@ -14,31 +14,35 @@ export default async function Sidebar() {
   const playlists = await getUserLikedPlaylists(session);
 
   return (
-    <aside className="fixed w-64 h-full top-2 left-2">
-      <div className="flex flex-col items-center h-full p-4 rounded-md bg-paper-700">
+    <aside className="fixed w-64 h-screen text-sm top-2 bottom-2 left-2">
+      <div className="flex flex-col items-center p-4 rounded-lg bg-paper-700">
         <Image
           src="/images/spotify_logo.png"
           width={125}
           height={50}
           alt="Spotify logo"
         />
-
         <SidebarLinksList />
       </div>
 
-      <div className="flex flex-col items-center h-full m-5 mt-2 bg-paper-700">
-        <ul
-          id="sidebar-playlists"
-          className="flex flex-col w-full gap-3 pr-3 mt-5 overflow-x-hidden text-sm text-gray"
-        >
+      <div className="flex flex-col items-center p-4 mt-2 rounded-lg bg-paper-700">
+        <ul className="flex flex-col w-full gap-3 pr-3 overflow-x-hidden overflow-y-scroll text-sm text-gray">
           {playlists.map((playlist) => (
-            <Link key={playlist.id} href={`/playlists/${playlist.id}`}>
-              <li
-                key={playlist.id}
-                className="w-full text-sm font-semibold truncate cursor-default hover:text-white"
-              >
+            <Link
+              key={playlist.id}
+              href={`/playlists/${playlist.id}`}
+              className="flex items-center gap-3"
+            >
+              <Image
+                src={playlist.images[0].url}
+                alt={playlist.name}
+                height={50}
+                width={50}
+                className="rounded-md"
+              />
+              <span className="w-full text-sm font-semibold truncate cursor-default hover:text-white">
                 {playlist.name}
-              </li>
+              </span>
             </Link>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import PlaylistCards from "@/components/PlaylistCards";
+import SearchFilters from "@/components/SearchFilters";
 import { getSearchItems } from "@/lib/actions";
 import { Playlist } from "@/types/types";
 import { getAuthSession } from "@/utils/serverUtils";
@@ -24,7 +25,7 @@ export default async function PlaylistSearchResultPage({ params }: Props) {
     redirect("/login");
   }
 
-  const query = params.query;
+  const query = decodeURI(params.query);
 
   const playlistResponse = await getSearchItems(session, "playlist", query);
 
@@ -32,7 +33,7 @@ export default async function PlaylistSearchResultPage({ params }: Props) {
 
   return (
     <>
-      <h1>All Playlists for {`"${query}"`}</h1>
+      <SearchFilters />
       <PlaylistCards playlists={playlists} />
     </>
   );

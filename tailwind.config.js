@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         background: {
           DEFAULT: "#000000",
-          secondary: "#0F0F0F",
+          secondary: "#050505",
         },
         paper: {
           700: "#121212",

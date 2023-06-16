@@ -14,21 +14,17 @@ export const getNewReleases = async (
   session: AuthSession
 ): Promise<Album[]> => {
   return customGet(
-    "https://api.spotify.com/v1/browse/new-releases?country=IN&limit=18",
+    "https://api.spotify.com/v1/browse/new-releases?country=IN&limit=15",
     session
   ).then((data) => data.albums.items);
 };
 
-export const getFeaturedPlaylists = async (session: AuthSession) => {
+export const getRecentlyPlayedTracks = async (
+  session: AuthSession,
+  limit = 50
+) => {
   return customGet(
-    "https://api.spotify.com/v1/browse/featured-playlists?country=IN?limit=18",
-    session
-  );
-};
-
-export const getRecentlyPlayedTracks = async (session: AuthSession) => {
-  return customGet(
-    "https://api.spotify.com/v1/me/player/recently-played?limit=18",
+    `https://api.spotify.com/v1/me/player/recently-played?limit=${limit}`,
     session
   );
 };

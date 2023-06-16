@@ -23,15 +23,15 @@ export default function CardItem({
 }: Props) {
   return (
     <Link href={`/${type}/${id}`}>
-      <div className="p-4 transition duration-300 rounded cursor-pointer hover:bg-paper-secondary bg-paper">
+      <div className="p-4 transition duration-300 rounded-lg cursor-pointer hover:bg-paper-400 bg-paper-500">
         {images.length > 0 ? (
           <Image
             src={images[0].url}
             alt={altTitle}
-            height={144}
-            width={144}
-            className={`object-cover w-full h-36 ${
-              imageRounded ? "rounded-full" : "rounded"
+            height={160}
+            width={160}
+            className={`aspect-square object-cover w-full ${
+              imageRounded ? "rounded-full" : "rounded-md"
             }`}
           />
         ) : (
@@ -41,7 +41,9 @@ export default function CardItem({
         )}
         <h3 className="mt-5 font-bold truncate">{heading}</h3>
         {subheading && (
-          <h6 className="text-sm truncate text-gray">{subheading}</h6>
+          <h6 className="mt-1 text-xs font-semibold truncate text-gray">
+            {subheading}
+          </h6>
         )}
       </div>
     </Link>

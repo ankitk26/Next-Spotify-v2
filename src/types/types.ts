@@ -30,7 +30,7 @@ export interface Album {
   id: string;
   name: string;
   artists: Artist[];
-  images?: Image[];
+  images: Image[];
   album_type?: string;
   release_date: string;
   tracks: {

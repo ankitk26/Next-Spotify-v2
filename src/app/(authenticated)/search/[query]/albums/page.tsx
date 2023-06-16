@@ -1,4 +1,5 @@
 import AlbumCards from "@/components/AlbumCards";
+import SearchFilters from "@/components/SearchFilters";
 import { getSearchItems } from "@/lib/actions";
 import { Album } from "@/types/types";
 import { getAuthSession } from "@/utils/serverUtils";
@@ -24,7 +25,7 @@ export default async function AlbumsSearchResultPage({ params }: Props) {
     redirect("/login");
   }
 
-  const query = params.query;
+  const query = decodeURI(params.query);
 
   const albumResponse = await getSearchItems(session, "album", query);
 
@@ -32,7 +33,7 @@ export default async function AlbumsSearchResultPage({ params }: Props) {
 
   return (
     <>
-      <h1>All Albums for {`"${query}"`}</h1>
+      <SearchFilters />
       <AlbumCards albums={albums} />
     </>
   );

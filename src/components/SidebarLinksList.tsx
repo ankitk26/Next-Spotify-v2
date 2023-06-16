@@ -1,67 +1,51 @@
 "use client";
 
-import { Home, Search, Rows, Layers } from "lucide-react";
+import { Home, Layers, Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
+import SidebarLinkItem from "./SidebarLinkItem";
 
 export default function SidebarLinksList() {
-  const pathName = usePathname();
-  const activeLink = "bg-paper-secondary text-white";
-  const inactiveLink = "bg-transparent text-gray";
+  const pathname = usePathname();
 
   return (
     <ul className="w-full mt-4">
-      <Link href="/">
-        <li
-          className={`${
-            pathName === "/" ? activeLink : inactiveLink
-          } flex items-center gap-4 p-2 rounded`}
-        >
-          <Home size={24} />
-          <span className="font-bold">Home</span>
-        </li>
-      </Link>
-
-      <Link href="/search">
-        <li
-          className={`${
-            pathName === "/search" ? activeLink : inactiveLink
-          } flex items-center gap-4 p-2 rounded cursor-pointer  hover:text-white`}
-        >
-          <Search size={24} />
-
-          <span className="font-bold">Search</span>
-        </li>
-      </Link>
-
-      <Link href="/collection/playlists">
-        <li
-          className={`${
-            pathName.includes("/collection") && !pathName.includes("tracks")
-              ? activeLink
-              : inactiveLink
-          } flex items-center gap-4 p-2 rounded cursor-pointer  hover:text-white`}
-        >
-          <Layers size={24} />
-          <span className="font-bold">Your Library</span>
-        </li>
-      </Link>
+      <SidebarLinkItem
+        path="/"
+        activeCondition={pathname === "/"}
+        icon={<Home size={20} />}
+        label="Home"
+      />
+      <SidebarLinkItem
+        path="/search"
+        activeCondition={pathname === "/search"}
+        icon={<Search size={20} />}
+        label="Search"
+      />
+      <SidebarLinkItem
+        path="/collection/playlists"
+        activeCondition={
+          pathname.includes("/collection") && !pathname.includes("tracks")
+        }
+        icon={<Layers size={20} />}
+        label="Your Library"
+      />
 
       <Link href="/collection/tracks">
         <li
           className={`${
-            pathName === "/collection/tracks" ? "text-white" : "text-gray"
-          } flex items-center mt-6 gap-3 p-2 text-sm rounded cursor-pointer  hover:text-white`}
+            pathname === "/collection/tracks" ? "text-white" : "text-gray"
+          } flex items-center mt-6 gap-4 p-2 rounded cursor-pointer  hover:text-white`}
         >
           <Image
             src="/images/liked_cover.jpeg"
-            height={28}
-            width={28}
+            height={30}
+            width={30}
             className="rounded"
             alt="Liked playlist cover"
           />
-          <span className="font-bold">Liked songs</span>
+          <span className="font-semibold">Liked songs</span>
         </li>
       </Link>
     </ul>

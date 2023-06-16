@@ -19,18 +19,18 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full p-4 pl-10 bg-[#111011]">
+    <header className="sticky top-0 z-50 flex items-center justify-between w-full p-4 pl-10 bg-paper-700">
       <div className="flex items-center gap-10 w-[32rem]">
         <div className="flex items-center gap-3">
           <button
-            className="flex items-center p-1 bg-[#0B0B0A] rounded-full focus:outline-none"
+            className="flex items-center p-1 rounded-full bg-background-secondary focus:outline-none"
             onClick={() => router.back()}
           >
             <ChevronLeft className="text-2xl text-gray" />
           </button>
 
           <button
-            className="flex items-center p-1 bg-[#0B0B0A] rounded-full focus:outline-none"
+            className="flex items-center p-1 rounded-full bg-background-secondary focus:outline-none"
             onClick={() => router.forward()}
           >
             <ChevronRight className="text-2xl text-gray" />
@@ -44,9 +44,9 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-6">
-        <div className="flex items-center gap-3 py-2 pl-2 pr-4 bg-black rounded-full bg-opacity-70">
+        <div className="flex items-center gap-3 py-2 pl-2 pr-4 rounded-full bg-background-secondary bg-opacity-70">
           {session?.user.image === undefined ? (
-            <User2 className="bg-[#333333] p-1 rounded-full text-2xl" />
+            <User2 className="p-1 text-2xl rounded-full bg-paper-400" />
           ) : (
             <Image
               src={session?.user.picture as string}
@@ -62,7 +62,7 @@ export default function Header() {
         </div>
 
         <button
-          className="flex items-center justify-center bg-black bg-opacity-70 rounded-full h-10 w-10 hover:bg-[#181818] focus:outline-none cursor-pointer"
+          className="flex items-center justify-center bg-background-secondary bg-opacity-70 rounded-full h-10 w-10 hover:bg-[#181818] focus:outline-none cursor-pointer"
           onClick={logout}
         >
           <LogOut />

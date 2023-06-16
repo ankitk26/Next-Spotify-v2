@@ -1,3 +1,4 @@
+import SearchFilters from "@/components/SearchFilters";
 import TracksTable from "@/components/TracksTable";
 import { getSearchItems } from "@/lib/actions";
 import { Track } from "@/types/types";
@@ -32,7 +33,7 @@ export default async function TrackSearchResultPage({ params }: Props) {
 
   return (
     <>
-      <h1>All Playlists for {`"${query}"`}</h1>
+      <SearchFilters />
       <TracksTable tracks={tracks} />
     </>
   );

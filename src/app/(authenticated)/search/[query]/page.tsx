@@ -1,6 +1,7 @@
 import AlbumCards from "@/components/AlbumCards";
 import ArtistCards from "@/components/ArtistCards";
 import PlaylistCards from "@/components/PlaylistCards";
+import SearchFilters from "@/components/SearchFilters";
 import SearchResultHeader from "@/components/SearchResultHeader";
 import { getSearchItems } from "@/lib/actions";
 import { Artist } from "@/types/types";
@@ -31,12 +32,15 @@ export default async function SearchResults({ params }: Props) {
     redirect("/login");
   }
 
-  const query = params.query;
+  const query = decodeURI(params.query);
+
   const searchResults = await getSearchItems(session, "all", query);
 
   return (
     <div className="flex flex-col items-stretch gap-8">
-      <div className="flex flex-col items-stretch mt-4">
+      <SearchFilters />
+
+      <div className="flex flex-col items-stretch -mt-8">
         <SearchResultHeader query={query} resultType="tracks" />
 
         {searchResults.tracks.items.slice(0, 5).map((track: any) => (

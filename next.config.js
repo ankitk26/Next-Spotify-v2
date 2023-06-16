@@ -15,6 +15,7 @@ const nextConfig = {
       "mosaic.scdn.co",
       "mixed-media-images.spotifycdn.com",
       "lineup-images.scdn.co",
+      "thisis-images.scdn.co",
     ],
   },
 };

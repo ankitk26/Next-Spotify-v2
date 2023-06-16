@@ -1,4 +1,5 @@
 import ArtistCards from "@/components/ArtistCards";
+import SearchFilters from "@/components/SearchFilters";
 import { getSearchItems } from "@/lib/actions";
 import { Artist } from "@/types/types";
 import { getAuthSession } from "@/utils/serverUtils";
@@ -24,14 +25,14 @@ export default async function ArtistsSearchResultPage({ params }: Props) {
     redirect("/login");
   }
 
-  const query = params.query;
+  const query = decodeURI(params.query);
 
   const artistResponse = await getSearchItems(session, "artist", query);
   const artists = artistResponse.artists.items as Artist[];
 
   return (
     <>
-      <h1>All Artists for {`"${query}"`}</h1>
+      <SearchFilters />
       <ArtistCards artists={artists} />
     </>
   );

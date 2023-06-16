@@ -1,12 +1,10 @@
+import "@/app/globals.css";
 import Header from "@/components/Header";
 import { NextAuthProvider } from "@/components/NextAuthProvider";
-import Sidebar from "@/components/Sidebar";
-import { Montserrat } from "next/font/google";
-import "@/app/globals.css";
-import { getAuthSession } from "@/utils/serverUtils";
-import { redirect } from "next/navigation";
-import TrackPlayerProvider from "@/providers/TrackPlayerProvider";
 import PreviewPlayer from "@/components/PreviewPlayer";
+import Sidebar from "@/components/Sidebar";
+import TrackPlayerProvider from "@/providers/TrackPlayerProvider";
+import { Montserrat } from "next/font/google";
 
 const fontFamily = Montserrat({ subsets: ["latin"] });
 
@@ -25,10 +23,10 @@ export default function RootLayout({
       <NextAuthProvider>
         <TrackPlayerProvider>
           <body
-            className={fontFamily.className + "text-white p-2 bg-background"}
+            className={fontFamily.className + " text-white p-2 bg-background"}
           >
             <Sidebar />
-            <div className="flex flex-col ml-[264px]">
+            <div className="flex rounded-lg bg-paper-700 flex-col ml-[264px]">
               <Header />
               <main className="mx-8 my-4">{children}</main>
             </div>
