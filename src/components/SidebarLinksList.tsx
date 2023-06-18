@@ -1,51 +1,38 @@
 "use client";
 
-import { Home, Layers, Search } from "lucide-react";
-import Image from "next/image";
+import { Home, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SidebarLinkItem from "./SidebarLinkItem";
 
 export default function SidebarLinksList() {
   const pathname = usePathname();
 
-  return (
-    <ul className="w-full mt-4">
-      <SidebarLinkItem
-        path="/"
-        activeCondition={pathname === "/"}
-        icon={<Home size={20} />}
-        label="Home"
-      />
-      <SidebarLinkItem
-        path="/search"
-        activeCondition={pathname === "/search"}
-        icon={<Search size={20} />}
-        label="Search"
-      />
-      <SidebarLinkItem
-        path="/collection/playlists"
-        activeCondition={
-          pathname.includes("/collection") && !pathname.includes("tracks")
-        }
-        icon={<Layers size={20} />}
-        label="Your Library"
-      />
+  const activeLink = "bg-paper-400 text-white";
+  const inactiveLink = "bg-transparent text-gray";
+  const linkStyle =
+    "flex items-center gap-4 p-2 rounded-md cursor-pointer  hover:text-white";
 
-      <Link href="/collection/tracks">
+  return (
+    <ul className="flex flex-col items-stretch w-full gap-2 mt-4">
+      <Link href="/">
         <li
-          className={`${
-            pathname === "/collection/tracks" ? "text-white" : "text-gray"
-          } flex items-center mt-6 gap-4 p-2 rounded cursor-pointer  hover:text-white`}
+          className={`${linkStyle} ${
+            pathname === "/" ? activeLink : inactiveLink
+          }`}
         >
-          <Image
-            src="/images/liked_cover.jpeg"
-            height={30}
-            width={30}
-            className="rounded"
-            alt="Liked playlist cover"
-          />
-          <span className="font-semibold">Liked songs</span>
+          <Home size={20} />
+          <span className="font-semibold">Home</span>
+        </li>
+      </Link>
+
+      <Link href="/search">
+        <li
+          className={`${linkStyle} ${
+            pathname === "/search" ? activeLink : inactiveLink
+          }`}
+        >
+          <Search size={20} />
+          <span className="font-semibold">Search</span>
         </li>
       </Link>
     </ul>

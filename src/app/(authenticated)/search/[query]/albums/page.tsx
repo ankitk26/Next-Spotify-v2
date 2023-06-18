@@ -27,7 +27,7 @@ export default async function AlbumsSearchResultPage({ params }: Props) {
 
   const query = decodeURI(params.query);
 
-  const albumResponse = await getSearchItems(session, "album", query);
+  const albumResponse = await getSearchItems(session, "album", query, 50);
 
   const albums = albumResponse.albums.items as Album[];
 

@@ -42,7 +42,7 @@ export interface Album {
 export interface Artist {
   id: string;
   name: string;
-  images?: Image[];
+  images: Image[];
   followers?: {
     total: number;
   };
@@ -107,5 +107,3 @@ export interface TrackAnalysis {
   tempo: number;
   valence: number;
 }
-
-export type Analysis = Record<keyof TrackAnalysis, number>;

@@ -17,7 +17,7 @@ export default function LoginPageLayout({
   return (
     <html lang="en">
       <NextAuthProvider>
-        <body className={fontFamily.className + " text-white bg-background"}>
+        <body className={fontFamily.className + " text-white bg-paper-700"}>
           <main>{children}</main>
         </body>
       </NextAuthProvider>

@@ -23,7 +23,7 @@ export default function CardItem({
 }: Props) {
   return (
     <Link href={`/${type}/${id}`}>
-      <div className="p-4 transition duration-300 rounded-lg cursor-pointer hover:bg-paper-400 bg-paper-500">
+      <div className="h-full p-4 transition duration-300 rounded-lg cursor-pointer hover:bg-paper-400 bg-paper-500">
         {images.length > 0 ? (
           <Image
             src={images[0].url}

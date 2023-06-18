@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { MdPlayArrow } from "react-icons/md";
 
 interface Props {
   params: {
@@ -81,6 +82,10 @@ export default async function AlbumPage({ params }: Props) {
           </div>
         </>
       </div>
+
+      <button className="flex items-center justify-center mt-8 rounded-full w-14 h-14 bg-primary">
+        <MdPlayArrow className="text-4xl text-paper-700" />
+      </button>
 
       <TrackRecommendations trackId={trackId} />
     </>

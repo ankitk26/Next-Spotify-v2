@@ -41,9 +41,9 @@ export default async function SearchResults({ params }: Props) {
       <SearchFilters />
 
       <div className="flex flex-col items-stretch -mt-8">
-        <SearchResultHeader query={query} resultType="tracks" />
+        <h1>Tracks</h1>
 
-        {searchResults.tracks.items.slice(0, 5).map((track: any) => (
+        {searchResults.tracks.items.map((track: any) => (
           <div
             className="grid items-center grid-cols-12 col-span-12 my-3"
             key={track.id}
@@ -84,24 +84,22 @@ export default async function SearchResults({ params }: Props) {
 
       {searchResults.artists.items.length > 0 && (
         <div>
-          <SearchResultHeader query={query} resultType="artists" />
-          <ArtistCards artists={searchResults.artists.items.slice(0, 6)} />
+          <h1>Artists</h1>
+          <ArtistCards artists={searchResults.artists.items} />
         </div>
       )}
 
       {searchResults.albums.items.length > 0 && (
         <div>
-          <SearchResultHeader query={query} resultType="albums" />
-          <AlbumCards albums={searchResults.albums.items.slice(0, 6)} />
+          <h1>Albums</h1>
+          <AlbumCards albums={searchResults.albums.items} />
         </div>
       )}
 
       {searchResults.playlists.items.length > 0 && (
         <div>
-          <SearchResultHeader query={query} resultType="playlists" />
-          <PlaylistCards
-            playlists={searchResults.playlists.items.slice(0, 6)}
-          />
+          <h1>Playlists</h1>
+          <PlaylistCards playlists={searchResults.playlists.items} />
         </div>
       )}
     </div>

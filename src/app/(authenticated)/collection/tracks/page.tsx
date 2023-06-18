@@ -1,6 +1,7 @@
 import TracksTable from "@/components/TracksTable";
 import { getUserLikedSongs } from "@/lib/actions";
 import { getAuthSession } from "@/utils/serverUtils";
+import { Dot } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -28,19 +29,28 @@ export default async function LikedTracksPage() {
           width={208}
         />
         <div className="flex flex-col gap-3">
-          <h5 className="text-sm font-bold uppercase">Playlist</h5>
-          <h2 className="text-5xl font-bold">Liked Songs</h2>
+          <h5 className="text-sm font-bold">Playlist</h5>
+          <h2 className="mt-2 text-6xl font-bold">Liked Songs</h2>
 
-          <div className="flex items-center gap-5 text-sm">
-            <span className="font-bold">{session?.user.name}</span>
-            {likedTracks.length > 0 && (
-              <span className="text-gray">{likedTracks.length} songs</span>
+          <div className="flex items-center text-sm font-semibold">
+            <span>{session?.user.name}</span>
+            {likedTracks.total > 0 && (
+              <>
+                <Dot />
+                <span>{likedTracks.total} songs</span>
+              </>
             )}
           </div>
         </div>
       </div>
 
-      <TracksTable tracks={likedTracks} />
+      <TracksTable
+        tracks={likedTracks.items}
+        showHeader
+        showAlbum
+        showCover
+        showSubtitle
+      />
     </>
   );
 }

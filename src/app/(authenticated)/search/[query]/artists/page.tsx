@@ -27,7 +27,7 @@ export default async function ArtistsSearchResultPage({ params }: Props) {
 
   const query = decodeURI(params.query);
 
-  const artistResponse = await getSearchItems(session, "artist", query);
+  const artistResponse = await getSearchItems(session, "artist", query, 50);
   const artists = artistResponse.artists.items as Artist[];
 
   return (

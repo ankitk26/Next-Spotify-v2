@@ -1,3 +1,5 @@
+const { blackA, mauve, violet } = require("@radix-ui/colors");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -12,6 +14,9 @@ module.exports = {
           DEFAULT: "#000000",
           secondary: "#050505",
         },
+        ...blackA,
+        ...mauve,
+        ...violet,
         paper: {
           700: "#121212",
           600: "#232323",
@@ -20,7 +25,7 @@ module.exports = {
         },
         white: "#FEFFFE",
         purple: "#531640",
-        primary: "#1DB954",
+        primary: "#1ED760",
         gray: {
           DEFAULT: "#B3B3B3",
           dark: "#4D4D4D",

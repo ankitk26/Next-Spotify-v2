@@ -27,14 +27,14 @@ export default async function TrackSearchResultPage({ params }: Props) {
 
   const query = params.query;
 
-  const trackResponse = await getSearchItems(session, "track", query);
-
-  const tracks = trackResponse.tracks.items as Track[];
+  const tracks = (await getSearchItems(session, "track", query, 50).then(
+    (data) => data.tracks.items
+  )) as Track[];
 
   return (
     <>
       <SearchFilters />
-      <TracksTable tracks={tracks} />
+      <TracksTable tracks={tracks} showCover showSubtitle />
     </>
   );
 }

@@ -23,10 +23,13 @@ export default function RootLayout({
       <NextAuthProvider>
         <TrackPlayerProvider>
           <body
-            className={fontFamily.className + " text-white p-2 bg-background"}
+            className={
+              fontFamily.className +
+              " text-white p-2 min-h-screen bg-background"
+            }
           >
             <Sidebar />
-            <div className="flex rounded-lg bg-paper-700 flex-col ml-[264px]">
+            <div className="flex rounded-lg bg-paper-700 min-h-screen flex-col ml-[264px]">
               <Header />
               <main className="mx-8 my-4">{children}</main>
             </div>

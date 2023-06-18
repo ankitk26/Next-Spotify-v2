@@ -11,6 +11,7 @@ import {
   SkipBack,
   SkipForward,
 } from "lucide-react";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 
 export default function MainControllers() {
   const {
@@ -31,20 +32,20 @@ export default function MainControllers() {
           <Shuffle size={16} className="text-gray" />
         </button>
         <button>
-          <SkipBack size={16} className="text-xl text-gray" />
+          <SkipBack size={18} className="text-xl text-gray" />
         </button>
         <button
           onClick={togglePlay}
-          className="flex items-center justify-center w-8 h-8 text-black bg-white rounded-full focus:outline-none"
+          className="flex items-center justify-center w-8 h-8 p-0 text-black bg-white rounded-full focus:outline-none"
         >
           {isPlaying ? (
-            <Pause size={18} fill="#131312" />
+            <MdPause className="text-2xl text-paper-700" />
           ) : (
-            <Play size={18} fill="#131312" />
+            <MdPlayArrow className="text-2xl text-paper-700" />
           )}
         </button>
         <button>
-          <SkipForward size={16} className="text-gray" />
+          <SkipForward size={18} className="text-gray" />
         </button>
         <button>
           <Repeat2 size={16} className="text-gray" />
@@ -56,7 +57,7 @@ export default function MainControllers() {
           {currentTime ? fmtMSS(currentTime * 1000) : "0:00"}
         </span>
         <Progress.Root
-          className="relative w-1/2 h-1 overflow-hidden rounded-full bg-gray-secondary"
+          className="relative w-1/2 h-1 overflow-hidden rounded-full bg-gray-dark"
           style={{ transform: "translateZ(0)" }}
           value={slider}
         >

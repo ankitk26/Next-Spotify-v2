@@ -5,6 +5,7 @@ import { getArtistById, getArtistDiscography } from "@/lib/actions";
 import { getAuthSession } from "@/utils/serverUtils";
 import { Music } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Metadata } from "next/types";
 
@@ -73,7 +74,7 @@ export default async function ArtistPage({ params }: Props) {
                 {artist.genres.map((genre: string) => (
                   <span
                     key={genre}
-                    className="px-4 py-1 text-xs capitalize rounded-full bg-paper-secondary"
+                    className="px-4 py-1 text-xs capitalize rounded-full bg-paper-600 hover:bg-paper-400"
                   >
                     {genre}
                   </span>
@@ -87,7 +88,7 @@ export default async function ArtistPage({ params }: Props) {
       <div className="mt-8">
         <h1>Popular</h1>
         <div className="-mt-8">
-          <TracksTable tracks={artistTopTracks.tracks} noAlbum noArtist />
+          <TracksTable tracks={artistTopTracks.tracks} showCover />
         </div>
       </div>
 

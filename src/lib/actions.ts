@@ -1,6 +1,5 @@
 import {
   Album,
-  Analysis,
   Artist,
   AuthSession,
   Category,
@@ -122,14 +121,16 @@ export const getUserLikedArtists = async (
 };
 
 export const getUserLikedSongs = async (
-  session: AuthSession,
-  limit = 50
-): Promise<Track[]> => {
+  session: AuthSession
+): Promise<{ total: number; items: Track[] }> => {
   const data = await customGet(
-    `https://api.spotify.com/v1/me/tracks?market=from_token&limit=${limit}`,
+    `https://api.spotify.com/v1/me/tracks?market=from_token`,
     session
   );
-  return data.items.map((item: any) => item.track);
+  return {
+    total: data.total,
+    items: data.items.map((item: any) => item.track),
+  };
 };
 
 export const getUserLikedPlaylists = async (
@@ -165,7 +166,8 @@ export const getCategories = async (
 export const getSearchItems = async (
   session: AuthSession,
   type: "artist" | "album" | "track" | "playlist" | "all",
-  query: string
+  query: string,
+  limit = 5
 ) => {
   let searchType: string;
   if (type === "all") {
@@ -173,8 +175,9 @@ export const getSearchItems = async (
   } else {
     searchType = type;
   }
+
   return customGet(
-    `https://api.spotify.com/v1/search?q=${query}&market=from_token&type=${searchType}&limit=50`,
+    `https://api.spotify.com/v1/search?q=${query}&market=from_token&type=${searchType}&limit=${limit}`,
     session
   );
 };

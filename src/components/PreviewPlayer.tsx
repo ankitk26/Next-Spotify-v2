@@ -14,8 +14,8 @@ export default function PreviewPlayer() {
 
   return (
     <footer
-      className={`sticky bottom-0 grid grid-cols-12 gap-12 items-center justify-between px-5 border-[#272727] bg-player ${
-        currentTrack ? "py-3 border-t" : "py-0 border-0"
+      className={`sticky bottom-0 grid grid-cols-12 gap-12 bg-background items-center justify-between px-3 py-3 ${
+        currentTrack ? "py-3" : "py-0"
       }`}
     >
       <PlayerTrackInfo currentTrack={currentTrack} />

@@ -19,7 +19,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full p-4 pl-10 bg-paper-700">
+    <header className="sticky top-0 z-50 flex items-center justify-between w-full p-4 pl-10 rounded-lg bg-paper-700">
       <div className="flex items-center gap-10 w-[32rem]">
         <div className="flex items-center gap-3">
           <button

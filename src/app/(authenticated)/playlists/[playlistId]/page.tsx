@@ -1,10 +1,9 @@
-import styles from "@/app/Description.module.css";
+import styles from "@/styles/Description.module.css";
 import TracksTable from "@/components/TracksTable";
 import { getPlaylistById } from "@/lib/actions";
-import { Playlist } from "@/types/types";
-import { customGet, getAuthSession } from "@/utils/serverUtils";
+import { getAuthSession } from "@/utils/serverUtils";
 import parse from "html-react-parser";
-import { Music } from "lucide-react";
+import { Dot, Music } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -56,31 +55,34 @@ export default async function PlaylistPage({ params }: Props) {
                 <Music size={160} className="w-full h-full bg-paper " />
               </div>
             )}
+
             <div className="flex flex-col gap-3">
               <h5 className="text-xs font-bold uppercase">{playlist.type}</h5>
-              <h2 className="text-5xl font-bold">{playlist.name}</h2>
+              <h2 className="text-6xl font-bold">{playlist.name}</h2>
 
               {playlist.description && (
-                <p className={styles.description}>
+                <p className={styles.description + " font-medium mt-3"}>
                   {parse(playlist.description)}
                 </p>
               )}
 
-              <div className="flex items-center gap-5 text-sm">
-                <span className="font-bold">
-                  {playlist.owner?.display_name}
-                </span>
+              <div className="flex items-center text-sm font-semibold">
+                <span>{playlist.owner?.display_name}</span>
                 {playlist.followers.total > 0 && (
-                  <span className="text-gray">
-                    {playlist.followers.total.toLocaleString()}{" "}
-                    {playlist.followers.total > 1 ? "likes" : "like"}
-                  </span>
+                  <>
+                    <Dot />
+                    <span>
+                      {playlist.followers.total.toLocaleString()}{" "}
+                      {playlist.followers.total > 1 ? "likes" : "like"}
+                    </span>
+                  </>
                 )}
                 {playlist.tracks.items.length > 0 && (
-                  <span className="text-gray">
-                    {playlist.tracks.total.toLocaleString()} songs
-                  </span>
-                )}{" "}
+                  <>
+                    <Dot />
+                    <span>{playlist.tracks.total.toLocaleString()} songs</span>
+                  </>
+                )}
               </div>
             </div>
           </>
@@ -92,6 +94,10 @@ export default async function PlaylistPage({ params }: Props) {
           tracks={playlist?.tracks.items
             .filter((item: any) => item.track !== null)
             .map((item: any) => item.track)}
+          showAlbum
+          showCover
+          showHeader
+          showSubtitle
         />
       </div>
     </>

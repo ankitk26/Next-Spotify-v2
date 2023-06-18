@@ -27,7 +27,7 @@ export default async function PlaylistSearchResultPage({ params }: Props) {
 
   const query = decodeURI(params.query);
 
-  const playlistResponse = await getSearchItems(session, "playlist", query);
+  const playlistResponse = await getSearchItems(session, "playlist", query, 50);
 
   const playlists = playlistResponse.playlists.items as Playlist[];
 
