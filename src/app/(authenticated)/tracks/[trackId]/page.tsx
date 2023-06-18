@@ -1,3 +1,4 @@
+import PlayTrackButton from "@/components/PlayTrackButton";
 import TrackRecommendations from "@/components/TrackRecommendations";
 import { getTrackById } from "@/lib/actions";
 import { fmtMSS } from "@/utils/clientUtils";
@@ -7,7 +8,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { MdPlayArrow } from "react-icons/md";
 
 interface Props {
   params: {
@@ -83,9 +83,7 @@ export default async function AlbumPage({ params }: Props) {
         </>
       </div>
 
-      <button className="flex items-center justify-center mt-8 rounded-full w-14 h-14 bg-primary">
-        <MdPlayArrow className="text-4xl text-paper-700" />
-      </button>
+      <PlayTrackButton track={track} variant="large" />
 
       <TrackRecommendations trackId={trackId} />
     </>

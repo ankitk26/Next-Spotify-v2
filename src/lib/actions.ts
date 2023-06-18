@@ -124,7 +124,7 @@ export const getUserLikedSongs = async (
   session: AuthSession
 ): Promise<{ total: number; items: Track[] }> => {
   const data = await customGet(
-    `https://api.spotify.com/v1/me/tracks?market=from_token`,
+    `https://api.spotify.com/v1/me/tracks?limit=50`,
     session
   );
   return {

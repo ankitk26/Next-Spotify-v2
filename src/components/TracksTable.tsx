@@ -1,13 +1,12 @@
 "use client";
 
-import { usePlayer } from "@/providers/TrackPlayerProvider";
 import { Track } from "@/types/types";
 import { fmtMSS } from "@/utils/clientUtils";
 import { Clock3, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { MdPlayArrow } from "react-icons/md";
+import PlayTrackButton from "./PlayTrackButton";
 
 interface Props {
   tracks: Track[];
@@ -24,14 +23,7 @@ export default function TracksTable({
   showHeader = false,
   showAlbum = false,
 }: Props) {
-  const { setCurrentTrack } = usePlayer();
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-
-  const playTrack = (track: Track) => {
-    if (track.preview_url) {
-      setCurrentTrack(track);
-    }
-  };
 
   return (
     <div className="mt-8">
@@ -81,12 +73,7 @@ export default function TracksTable({
             onMouseLeave={() => setHoveredRow(null)}
           >
             {hoveredRow === index && track.preview_url ? (
-              <button
-                className="flex items-center col-span-1 text-white"
-                onClick={() => playTrack(track)}
-              >
-                <MdPlayArrow className="flex items-center text-2xl text-white" />
-              </button>
+              <PlayTrackButton track={track} variant="small" />
             ) : (
               <span className="flex items-center col-span-1 text-sm text-gray">
                 {index + 1}

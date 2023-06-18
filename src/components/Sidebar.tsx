@@ -24,8 +24,8 @@ export default async function Sidebar() {
   ]);
 
   return (
-    <aside className="fixed w-64 h-screen col-span-2 text-sm top-2 bottom-2 left-2">
-      {/* <aside className="h-screen col-span-2 text-sm"> */}
+    // <aside className="fixed w-64 h-screen col-span-2 text-sm top-2 bottom-2 left-2">
+    <aside className="col-span-2 rounded-lg overflow-scroll h-[87vh] text-sm">
       <div className="flex flex-col items-center p-4 rounded-lg bg-paper-700">
         <Image
           src="/images/spotify_logo.png"

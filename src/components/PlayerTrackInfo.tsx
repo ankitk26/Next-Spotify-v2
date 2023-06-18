@@ -23,7 +23,9 @@ export default function PlayerTrackInfo({ currentTrack }: IProps) {
         <Music size={40} />
       )}
       <div className="max-w-full">
-        <h4 className="text-sm font-semibold truncate">{currentTrack?.name}</h4>
+        <h4 className="text-sm font-semibold text-white truncate">
+          {currentTrack?.name}
+        </h4>
         <Link
           href={`/artist/${currentTrack?.artists[0].id}`}
           className="text-xs text-gray"
