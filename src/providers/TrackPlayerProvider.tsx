@@ -1,6 +1,5 @@
 "use client";
 
-import { Track } from "@/types/types";
 import {
   Dispatch,
   SetStateAction,
@@ -9,10 +8,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useStore } from "./zustand";
 
 interface TrackProviderState {
-  currentTrack: Track | null;
-  setCurrentTrack: Dispatch<SetStateAction<Track | null>>;
   currentTrackAudio: HTMLAudioElement | null;
   isPlaying: boolean;
   play: () => Promise<void>;
@@ -33,7 +31,8 @@ interface Props {
 }
 
 export default function TrackPlayerProvider({ children }: Props) {
-  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const { currentTrack } = useStore();
+
   const [currentTrackAudio, setCurrentTrackAudio] =
     useState<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -112,9 +111,7 @@ export default function TrackPlayerProvider({ children }: Props) {
   return (
     <PlayerContext.Provider
       value={{
-        currentTrack,
         currentTrackAudio,
-        setCurrentTrack,
         isPlaying,
         play,
         pause,

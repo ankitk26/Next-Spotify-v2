@@ -1,5 +1,6 @@
 import AlbumCards from "@/components/AlbumCards";
 import ArtistCards from "@/components/ArtistCards";
+import PlayTrackButton from "@/components/PlayTrackButton";
 import TrackCards from "@/components/TrackCards";
 import {
   getNewReleases,
@@ -60,20 +61,28 @@ export default async function Home() {
           <Link
             href={`/tracks/${track.id}`}
             key={track.id}
-            className="flex items-center col-span-4 gap-4 rounded-md bg-paper-600 hover:bg-paper-400"
+            className="flex items-center justify-between col-span-4 pr-4 truncate rounded-md group/item bg-paper-600 hover:bg-paper-400"
           >
-            {track.album.images.length > 0 ? (
-              <Image
-                src={track.album.images[0].url}
-                alt={track.name}
-                width={72}
-                height={72}
-                className="object-cover h-full rounded-tl-md rounded-bl-md aspect-square"
-              />
-            ) : (
-              <Album size={20} />
-            )}
-            <h3 className="font-semibold truncate">{track.name}</h3>
+            <div className="flex items-center gap-4">
+              {track.album.images.length > 0 ? (
+                <Image
+                  src={track.album.images[0].url}
+                  alt={track.name}
+                  width={72}
+                  height={72}
+                  className="object-cover h-full rounded-tl-md rounded-bl-md aspect-square"
+                />
+              ) : (
+                <Album size={20} />
+              )}
+              <h3 className="font-semibold truncate">{track.name}</h3>
+            </div>
+
+            <PlayTrackButton
+              track={track}
+              variant="filled"
+              className="invisible w-12 h-12 text-3xl group/btn group-hover/item:visible"
+            />
           </Link>
         ))}
       </div>

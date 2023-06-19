@@ -30,7 +30,7 @@ export default function RootLayout({
           >
             <div className="grid grid-cols-10 gap-2 p-2">
               <Sidebar />
-              <div className="flex flex-col h-[87vh] overflow-auto col-span-8 rounded-lg bg-paper-700">
+              <div className="flex flex-col h-[87vh] col-span-8 overflow-auto rounded-lg bg-paper-700">
                 <Header />
                 <main className="mx-8 my-4">{children}</main>
               </div>

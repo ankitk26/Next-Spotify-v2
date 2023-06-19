@@ -84,7 +84,11 @@ export default async function AlbumPage({ params }: Props) {
         </>
       </div>
 
-      <PlayTrackButton track={track} variant="large" />
+      <PlayTrackButton
+        track={track}
+        variant="filled"
+        className="mt-8 text-4xl h-14 w-14"
+      />
 
       <TrackRecommendations trackId={trackId} />
     </>

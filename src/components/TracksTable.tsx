@@ -73,7 +73,7 @@ export default function TracksTable({
             onMouseLeave={() => setHoveredRow(null)}
           >
             {hoveredRow === index && track.preview_url ? (
-              <PlayTrackButton track={track} variant="small" />
+              <PlayTrackButton track={track} className="text-2xl" />
             ) : (
               <span className="flex items-center col-span-1 text-sm text-gray">
                 {index + 1}

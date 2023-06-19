@@ -1,12 +1,12 @@
 "use client";
 
-import { usePlayer } from "@/providers/TrackPlayerProvider";
-import MainControllers from "./MainControllers";
+import { useStore } from "@/providers/zustand";
 import AdditionalControllers from "./AdditionalControllers";
+import MainControllers from "./MainControllers";
 import PlayerTrackInfo from "./PlayerTrackInfo";
 
 export default function PreviewPlayer() {
-  const { currentTrack } = usePlayer();
+  const { currentTrack } = useStore();
 
   if (!currentTrack) {
     return null;

@@ -1,38 +1,44 @@
 "use client";
 
-import { usePlayer } from "@/providers/TrackPlayerProvider";
+import { useStore } from "@/providers/zustand";
 import { Track } from "@/types/types";
 import { MdPlayArrow } from "react-icons/md";
 
 interface Props {
-  variant: "large" | "small";
+  variant?: "simple" | "filled";
   track: Track;
+  className?: string;
 }
 
-export default function PlayTrackButton({ variant, track }: Props) {
-  const { setCurrentTrack } = usePlayer();
+export default function PlayTrackButton({
+  variant = "simple",
+  track,
+  className,
+}: Props) {
+  const { setCurrentTrack } = useStore();
 
-  const smallButtonStyle = "flex items-center col-span-1 text-white";
-  const largeButtonStyle =
-    "flex items-center justify-center mt-8 rounded-full w-14 h-14 bg-primary";
-
-  const playTrack = (track: Track) => {
-    if (track.preview_url) {
-      setCurrentTrack(track);
-    }
-  };
+  const simpleButtonStyle = "flex items-center col-span-1 text-white";
+  const filledButtonStyle =
+    "flex items-center justify-center rounded-full bg-primary";
 
   return (
     <button
-      className={variant === "large" ? largeButtonStyle : smallButtonStyle}
-      onClick={() => playTrack(track)}
+      className={`${
+        variant === "filled" ? filledButtonStyle : simpleButtonStyle
+      } ${className} ${!track.preview_url && "cursor-not-allowed"}`}
+      onClick={(e) => {
+        e.preventDefault();
+        if (track.preview_url) {
+          setCurrentTrack(track);
+        }
+      }}
       disabled={track.preview_url === null}
     >
       <MdPlayArrow
         className={
-          variant === "large"
-            ? "text-4xl text-paper-700"
-            : "flex items-center text-2xl text-white"
+          variant === "filled"
+            ? "text-paper-700"
+            : "flex items-center text-white"
         }
       />
     </button>
