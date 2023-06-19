@@ -3,6 +3,7 @@ import ArtistCards from "@/components/ArtistCards";
 import PlaylistCards from "@/components/PlaylistCards";
 import SearchFilters from "@/components/SearchFilters";
 import SearchResultHeader from "@/components/SearchResultHeader";
+import TracksTable from "@/components/TracksTable";
 import { getSearchItems } from "@/lib/actions";
 import { Artist } from "@/types/types";
 import { fmtMSS } from "@/utils/clientUtils";
@@ -41,9 +42,15 @@ export default async function SearchResults({ params }: Props) {
       <SearchFilters />
 
       <div className="flex flex-col items-stretch -mt-8">
-        <h1>Tracks</h1>
+        <h1 className="-mb-4">Tracks</h1>
+        <TracksTable
+          tracks={searchResults.tracks.items}
+          showAlbum
+          showCover
+          showSubtitle
+        />
 
-        {searchResults.tracks.items.map((track: any) => (
+        {/* {searchResults.tracks.items.map((track: any) => (
           <div
             className="grid items-center grid-cols-12 col-span-12 my-3"
             key={track.id}
@@ -79,7 +86,7 @@ export default async function SearchResults({ params }: Props) {
               {fmtMSS(track.duration_ms)}
             </span>
           </div>
-        ))}
+        ))} */}
       </div>
 
       {searchResults.artists.items.length > 0 && (

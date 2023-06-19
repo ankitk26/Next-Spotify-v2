@@ -20,7 +20,7 @@ export default function PlayerTrackInfo({ currentTrack }: IProps) {
           className="object-cover rounded-lg w-14 h-14 aspect-square"
         />
       ) : (
-        <Music size={40} />
+        <Music size={56} />
       )}
       <div className="max-w-full">
         <h4 className="text-sm font-semibold text-white truncate">
