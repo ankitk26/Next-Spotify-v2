@@ -27,6 +27,7 @@ export default async function LikedTracksPage() {
           alt="Liked Songs"
           height={208}
           width={208}
+          priority
         />
         <div className="flex flex-col gap-3">
           <h5 className="text-sm font-bold">Playlist</h5>

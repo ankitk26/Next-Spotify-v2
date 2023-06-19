@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import LibraryItemCard from "./LibraryItemCard";
 import LibraryTypeTag from "./LibraryTypeTag";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 interface Props {
   playlists: Playlist[];
@@ -28,7 +27,6 @@ export default function UserLibrary({
   const [libraryType, setLibraryType] = useState(
     localStorage.getItem("libraryType") ?? "playlists"
   );
-  console.log(libraryType);
 
   function handleLibraryType(newType: string) {
     setLibraryType(newType);

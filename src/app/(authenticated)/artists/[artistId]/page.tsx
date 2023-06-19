@@ -59,6 +59,7 @@ export default async function ArtistPage({ params }: Props) {
                 height={208}
                 width={208}
                 className="object-cover rounded-full w-52 h-52"
+                priority
               />
             ) : (
               <div className="w-full h-40">

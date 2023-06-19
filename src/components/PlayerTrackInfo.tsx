@@ -1,8 +1,8 @@
-import { RxHeartFilled } from "react-icons/rx";
+import { Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { RxHeartFilled } from "react-icons/rx";
 import { Track } from "../types/types";
-import { Music } from "lucide-react";
 
 interface IProps {
   currentTrack: Track;

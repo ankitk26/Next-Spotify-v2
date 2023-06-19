@@ -49,6 +49,7 @@ export default async function PlaylistPage({ params }: Props) {
                 height={240}
                 width={240}
                 className="object-contain rounded-sm w-60 h-60"
+                priority
               />
             ) : (
               <div className="w-full h-40">

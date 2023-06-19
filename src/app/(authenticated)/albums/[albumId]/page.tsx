@@ -48,6 +48,7 @@ export default async function AlbumPage({ params }: Props) {
                 height={208}
                 width={208}
                 className="object-cover rounded-sm aspect-square w-52 h-52"
+                priority
               />
             ) : (
               <div className="w-full h-40">

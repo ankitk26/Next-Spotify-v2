@@ -5,17 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface LibraryItemCardProps {
+interface Props {
   type: "artists" | "playlists" | "albums";
   entity: Album | Artist | Playlist;
   subtitle?: string;
 }
 
-export default function LibraryItemCard({
-  type,
-  entity,
-  subtitle,
-}: LibraryItemCardProps) {
+export default function LibraryItemCard({ type, entity, subtitle }: Props) {
   const pathname = usePathname();
 
   const href = `/${type}/${entity.id}`;

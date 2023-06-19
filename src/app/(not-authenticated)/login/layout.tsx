@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-import { NextAuthProvider } from "@/components/NextAuthProvider";
+import { NextAuthProvider } from "@/providers/NextAuthProvider";
 import { Montserrat } from "next/font/google";
 
 const fontFamily = Montserrat({ subsets: ["latin"] });

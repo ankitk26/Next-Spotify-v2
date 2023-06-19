@@ -3,14 +3,7 @@
 import { usePlayer } from "@/providers/TrackPlayerProvider";
 import { fmtMSS } from "@/utils/clientUtils";
 import * as Progress from "@radix-ui/react-progress";
-import {
-  Pause,
-  Play,
-  Repeat2,
-  Shuffle,
-  SkipBack,
-  SkipForward,
-} from "lucide-react";
+import { Repeat2, Shuffle, SkipBack, SkipForward } from "lucide-react";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 
 export default function MainControllers() {
@@ -26,7 +19,6 @@ export default function MainControllers() {
 
   return (
     <div className="flex flex-col items-center justify-center col-span-7 gap-3">
-      {/* <pre>{JSON.stringify({ currentTime, duration }, null, 4)}</pre> */}
       <div className="flex items-center gap-5">
         <button>
           <Shuffle size={16} className="text-gray" />

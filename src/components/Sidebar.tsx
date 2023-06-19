@@ -32,6 +32,7 @@ export default async function Sidebar() {
           width={125}
           height={50}
           alt="Spotify logo"
+          priority
         />
         <SidebarLinksList />
       </div>

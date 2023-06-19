@@ -1,9 +1,32 @@
 "use client";
 
 import { Track } from "@/types/types";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-const PlayerContext = createContext({} as any);
+interface TrackProviderState {
+  currentTrack: Track | null;
+  setCurrentTrack: Dispatch<SetStateAction<Track | null>>;
+  currentTrackAudio: HTMLAudioElement | null;
+  isPlaying: boolean;
+  play: () => Promise<void>;
+  pause: () => void;
+  togglePlay: () => Promise<void>;
+  duration: number;
+  currentTime: number;
+  slider: number;
+  setSlider: Dispatch<SetStateAction<number>>;
+  drag: number;
+  setDrag: Dispatch<SetStateAction<number>>;
+}
+
+const PlayerContext = createContext<TrackProviderState>({} as any);
 
 interface Props {
   children: React.ReactNode;
@@ -47,7 +70,6 @@ export default function TrackPlayerProvider({ children }: Props) {
     tempAudio.preload = "none";
 
     setCurrentTrackAudio(tempAudio);
-    console.log("audio set");
 
     return () => {
       pause();
