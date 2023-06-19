@@ -34,7 +34,7 @@ export default function UserLibrary({
   }
 
   return (
-    <div className="flex flex-col items-stretch px-2 py-4 mt-2 overflow-scroll rounded-lg bg-paper-700">
+    <div className="flex flex-col items-stretch max-h-full px-2 py-4 mt-2 overflow-y-hidden rounded-lg bg-paper-700">
       <div className="flex items-center gap-3 px-2 text-gray">
         <Layers size={20} />
         <span className="font-semibold">Your Library</span>
@@ -61,7 +61,7 @@ export default function UserLibrary({
         </LibraryTypeTag>
       </div>
 
-      <ul className="flex flex-col w-full pr-3 overflow-x-hidden overflow-y-scroll text-sm">
+      <ul className="flex flex-col w-full pr-3 overflow-y-auto text-sm">
         {libraryType === "playlists" && (
           <>
             <Link

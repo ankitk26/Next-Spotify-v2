@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4d4d4d;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #4d4d4d;
+  border: none;
+}
+
 @layer base {
   h1 {
     @apply text-2xl inline-block font-bold mb-5;

@@ -25,13 +25,12 @@ export default function RootLayout({
           <body
             className={
               fontFamily.className +
-              " h-screen flex flex-col bg-background text-white items-stretch gap-2"
+              " h-screen flex flex-col overflow-hidden bg-background text-white items-stretch gap-2"
             }
           >
             <div className="grid grid-cols-10 gap-2 p-2">
               <Sidebar />
-              {/* <div className="flex rounded-lg bg-paper-700 min-h-screen flex-col ml-[264px]"> */}
-              <div className="flex flex-col h-[87vh] overflow-scroll col-span-8 rounded-lg bg-paper-700">
+              <div className="flex flex-col h-[87vh] overflow-auto col-span-8 rounded-lg bg-paper-700">
                 <Header />
                 <main className="mx-8 my-4">{children}</main>
               </div>
