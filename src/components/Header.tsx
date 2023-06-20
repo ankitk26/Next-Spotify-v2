@@ -45,8 +45,8 @@ export default function Header() {
 
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-3 py-2 pl-2 pr-4 rounded-full bg-background-secondary bg-opacity-70">
-          {session?.user.image === undefined ? (
-            <User2 className="p-1 text-2xl rounded-full bg-paper-400" />
+          {session?.user.image !== undefined ? (
+            <User2 className="p-1 rounded-full bg-paper-400" />
           ) : (
             <Image
               src={session?.user.picture as string}

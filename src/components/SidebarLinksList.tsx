@@ -10,10 +10,10 @@ export default function SidebarLinksList() {
   const activeLink = "bg-paper-400 text-white";
   const inactiveLink = "bg-transparent text-gray";
   const linkStyle =
-    "flex items-center gap-4 p-2 rounded-md cursor-pointer  hover:text-white";
+    "flex items-center gap-4 px-2 py-3 rounded-md cursor-pointer  hover:text-white";
 
   return (
-    <ul className="flex flex-col items-stretch w-full gap-2 mt-4">
+    <ul className="flex flex-col items-stretch w-full mt-4">
       <Link href="/">
         <li
           className={`${linkStyle} ${

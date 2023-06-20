@@ -72,7 +72,7 @@ export default function TracksTable({
             onMouseEnter={() => setHoveredRow(index)}
             onMouseLeave={() => setHoveredRow(null)}
           >
-            {hoveredRow === index && track.preview_url ? (
+            {hoveredRow === index ? (
               <PlayTrackButton track={track} className="text-2xl" />
             ) : (
               <span className="flex items-center col-span-1 text-sm text-gray">
@@ -104,7 +104,7 @@ export default function TracksTable({
                     />
                   ))}
 
-                <div className="w-full">
+                <div className="w-full pr-3 truncate">
                   <Link
                     href={`/tracks/${track.id}`}
                     className="w-10/12 text-sm font-medium truncate cursor-pointer hover:underline"
@@ -113,7 +113,7 @@ export default function TracksTable({
                   </Link>
 
                   {showSubtitle && (
-                    <div className="flex flex-wrap items-center w-10/12 gap-1 text-sm text-gray">
+                    <div className="flex flex-wrap items-center w-full gap-1 pr-3 text-sm text-gray">
                       <span className="truncate">
                         {track.artists.map((artist, index) => (
                           <Link
