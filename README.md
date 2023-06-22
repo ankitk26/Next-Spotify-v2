@@ -73,7 +73,6 @@ Working demo for the project - [Link](https://next-spotify-smoky-v2.vercel.app)
 
 ## To-do features
 
-- [ ] Infinite pagination
 - [ ] Add colors to headers
 - [ ] Improve track player
 - [ ] Shuffle play or play all tracks in album or playlist
