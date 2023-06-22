@@ -17,6 +17,7 @@ Working demo for the project - [Link](https://next-spotify-smoky-v2.vercel.app)
 ## Table of contents
 
 - [Technologies and Libraries used](#technologies)
+- [Migration](#migration)
 - [Features](#features)
 - [To-do features](#todo)
 - [Run locally](#run_locally)
@@ -39,11 +40,22 @@ Working demo for the project - [Link](https://next-spotify-smoky-v2.vercel.app)
 - [Zustand](https://zustand-demo.pmnd.rs/)
 
 
+<section id="migration" />
+
+## Migration from Next-Spotify v1 to Next-Spotify v2
+
+- Migrating from pages directory to app directory
+- Shifting from getServerSideProps to async calls in server components
+- Uniformity in usage of colors than v1
+- Updated UI
+- Use of both server components and client components together
+- Separate root layouts for different groups of pages
+
 <section id="features"/>
 
 ## Features
 
-- Log-in into the application using Spotify OAuth through the next-auth package
+- Spotify OAuth for authentication
 - View user's top tracks and artists based on listening frequency
 - Display user's top tracks of all time
 - View recently played tracks
