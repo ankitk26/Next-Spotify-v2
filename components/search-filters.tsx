@@ -1,9 +1,9 @@
 "use client";
 
-import { searchFilterTags } from "@/constants/constants";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { searchFilterTags } from "@/constants/constants";
+import { cn } from "@/lib/utils";
 
 export default function SearchFilters() {
   const pathname = usePathname();
@@ -12,19 +12,19 @@ export default function SearchFilters() {
   const query = params.query as string;
 
   return (
-    <div className="flex items-center gap-2 mb-8 text-sm">
+    <div className="mb-8 flex items-center gap-2 text-sm">
       {searchFilterTags.map((tag) => {
         const href = `/search/${query}${tag.link}`;
         return (
           <Link
-            key={tag.label}
             className={cn(
-              "px-4 py-1 font-medium transition-colors rounded-full",
+              "rounded-full px-4 py-1 font-medium transition-colors",
               pathname === href
                 ? "bg-white text-neutral-900"
-                : "bg-neutral-800 hover:bg-neutral-600 text-white"
+                : "bg-neutral-800 text-white hover:bg-neutral-600"
             )}
             href={href}
+            key={tag.label}
           >
             {tag.label}
           </Link>

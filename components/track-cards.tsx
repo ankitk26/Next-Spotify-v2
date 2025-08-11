@@ -1,6 +1,6 @@
-import { Track } from "@/types/types";
 import { Music } from "lucide-react";
 import Image from "next/image";
+import type { Track } from "@/types/types";
 import CardItemGrid from "./card-item-grid";
 
 type Props = {
@@ -16,26 +16,26 @@ export default function TrackCards({ tracks }: Props) {
         }
         return (
           <div
+            className="group/item h-full cursor-pointer rounded-lg bg-neutral-900 p-4 transition duration-300 hover:bg-neutral-950"
             key={track.id}
-            className="h-full p-4 transition duration-300 rounded-lg cursor-pointer group/item hover:bg-neutral-950 bg-neutral-900"
           >
             <div className="relative">
               {track.album.images.length > 0 ? (
                 <Image
-                  src={track.album.images[0].url}
                   alt={track.name}
+                  className="aspect-square w-full rounded-md object-cover"
                   height={160}
+                  src={track.album.images[0].url}
                   width={160}
-                  className="object-cover w-full rounded-md aspect-square"
                 />
               ) : (
-                <div className="w-full h-40">
-                  <Music className="w-full h-full bg-neutral-800" />
+                <div className="h-40 w-full">
+                  <Music className="h-full w-full bg-neutral-800" />
                 </div>
               )}
             </div>
-            <h3 className="mt-5 font-bold truncate">{track.name}</h3>
-            <h6 className="mt-1 text-xs font-semibold truncate text-neutral-500">
+            <h3 className="mt-5 truncate font-bold">{track.name}</h3>
+            <h6 className="mt-1 truncate font-semibold text-neutral-500 text-xs">
               {track.artists[0].name}
             </h6>
           </div>

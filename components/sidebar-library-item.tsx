@@ -1,11 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { SidebarLibrary } from "@/stores/sidebar-store";
-import { Album, Artist, Playlist } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import type { SidebarLibrary } from "@/stores/sidebar-store";
+import type { Album, Artist, Playlist } from "@/types/types";
 
 interface Props {
   type: SidebarLibrary;
@@ -20,29 +20,29 @@ export default function SidebarLibraryItem({ type, entity, subtitle }: Props) {
 
   return (
     <Link
-      href={href}
       className={cn(
-        "flex items-center p-2 gap-3 rounded-md text-white cursor-pointer  hover:bg-neutral-800",
+        "flex cursor-pointer items-center gap-3 rounded-md p-2 text-white hover:bg-neutral-800",
         pathname === href ? "bg-neutral-800" : ""
       )}
+      href={href}
     >
       <Image
-        src={entity.images[0].url}
         alt={entity.name}
-        height={50}
-        width={50}
         className={cn(
           "aspect-square object-cover",
           type === "artists" ? "rounded-full" : "rounded-md"
         )}
+        height={50}
+        src={entity.images[0].url}
+        width={50}
       />
 
       <div className="truncate">
-        <h6 className="w-full text-sm font-semibold truncate hover:text-white">
+        <h6 className="w-full truncate font-semibold text-sm hover:text-white">
           {entity.name}
         </h6>
         {type !== "artists" && (
-          <span className="mt-1 text-xs font-medium text-neutral-500">
+          <span className="mt-1 font-medium text-neutral-500 text-xs">
             {subtitle}
           </span>
         )}

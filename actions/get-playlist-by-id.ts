@@ -1,9 +1,9 @@
 "use server";
 
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getRequestWrapper } from "@/lib/get-request-wrapper";
-import { Playlist, Track } from "@/types/types";
-import { headers } from "next/headers";
+import type { Playlist, Track } from "@/types/types";
 
 export const getPlaylistById = async (playlistId: string) => {
   const session = await auth.api.getSession({

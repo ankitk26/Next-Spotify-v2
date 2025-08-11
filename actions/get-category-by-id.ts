@@ -1,9 +1,9 @@
 "use server";
 
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getRequestWrapper } from "@/lib/get-request-wrapper";
-import { Category } from "@/types/types";
-import { headers } from "next/headers";
+import type { Category } from "@/types/types";
 
 export const getCategoryById = async (categoryId: string) => {
   const session = await auth.api.getSession({

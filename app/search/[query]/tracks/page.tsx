@@ -1,7 +1,7 @@
+import type { Metadata } from "next/types";
 import { getSearchItems } from "@/actions/get-search-items";
 import SearchFilters from "@/components/search-filters";
 import TracksTable from "@/components/tracks-table";
-import { Metadata } from "next/types";
 
 interface Props {
   params: Promise<{
@@ -27,7 +27,7 @@ export default async function TrackSearchResultPage(props: Props) {
     <>
       <SearchFilters />
       {tracks && tracks.length > 0 && (
-        <TracksTable tracks={tracks} showCover showSubtitle />
+        <TracksTable showCover showSubtitle tracks={tracks} />
       )}
     </>
   );

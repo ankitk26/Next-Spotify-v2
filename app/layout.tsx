@@ -1,7 +1,7 @@
-import Header from "@/components/header";
-import QueryClientProvider from "@/providers/query-client-provider";
 import type { Metadata } from "next";
 import { Geist_Mono, Montserrat } from "next/font/google";
+import Header from "@/components/header";
+import QueryClientProvider from "@/providers/query-client-provider";
 import "./globals.css";
 import MainContent from "./main-content";
 
@@ -29,9 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <QueryClientProvider>
         <body
-          className={`${sansFont.variable} ${monoFont.variable} antialiased bg-black h-screen`}
+          className={`${sansFont.variable} ${monoFont.variable} h-screen bg-black antialiased`}
         >
-          <div className="flex flex-col h-full">
+          <div className="flex h-full flex-col">
             <Header />
             <MainContent>{children}</MainContent>
           </div>

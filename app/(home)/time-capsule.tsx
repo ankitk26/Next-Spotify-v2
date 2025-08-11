@@ -1,6 +1,6 @@
 import { getUserTopTracks } from "@/actions/get-user-top-tracks";
 import TrackCards from "@/components/track-cards";
-import { Track } from "@/types/types";
+import type { Track } from "@/types/types";
 
 export default async function TimeCapsule() {
   const allTimeTopTracks = (await getUserTopTracks({

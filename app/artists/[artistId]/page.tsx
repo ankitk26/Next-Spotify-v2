@@ -1,12 +1,12 @@
-import { getArtistById } from "@/actions/get-artist-by-id";
 import { Music } from "lucide-react";
 import Image from "next/image";
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
+import { getArtistById } from "@/actions/get-artist-by-id";
 import ArtistAlbums from "./artist-albums";
-import ArtistTopTracks from "./artist-popular-tracks";
-import ArtistSingles from "./artist-singles";
 import ArtistAppearsOn from "./artist-appears-on";
 import ArtistCompilation from "./artist-compilation";
+import ArtistTopTracks from "./artist-popular-tracks";
+import ArtistSingles from "./artist-singles";
 
 type Props = {
   params: Promise<{
@@ -36,28 +36,28 @@ export default async function ArtistPage(props: Props) {
           <>
             {artist.images.length > 0 ? (
               <Image
-                src={artist.images[0].url}
                 alt={artist.name}
+                className="h-52 w-52 rounded-full object-cover"
                 height={208}
-                width={208}
-                className="object-cover rounded-full w-52 h-52"
                 priority
+                src={artist.images[0].url}
+                width={208}
               />
             ) : (
-              <div className="w-full h-40">
-                <Music size={160} className="w-full h-full bg-neutral-700" />
+              <div className="h-40 w-full">
+                <Music className="h-full w-full bg-neutral-700" size={160} />
               </div>
             )}
             <div className="flex flex-col items-start gap-3">
-              <h2 className="text-5xl font-bold">{artist.name}</h2>
+              <h2 className="font-bold text-5xl">{artist.name}</h2>
               <span className="text-sm">
                 {artist.followers?.total.toLocaleString()} followers
               </span>
               <div className="flex items-center gap-5 text-sm">
                 {artist?.genres?.map((genre: string) => (
                   <span
+                    className="rounded-full bg-neutral-800 px-4 py-1 text-xs capitalize hover:bg-neutral-950"
                     key={genre}
-                    className="px-4 py-1 text-xs capitalize rounded-full bg-neutral-800 hover:bg-neutral-950"
                   >
                     {genre}
                   </span>

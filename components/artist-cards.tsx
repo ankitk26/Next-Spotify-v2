@@ -1,4 +1,4 @@
-import { Artist } from "@/types/types";
+import type { Artist } from "@/types/types";
 import CardItem from "./card-item";
 import CardItemGrid from "./card-item-grid";
 
@@ -11,13 +11,13 @@ export default function ArtistCards({ artists }: Props) {
     <CardItemGrid>
       {artists?.map((artist) => (
         <CardItem
-          key={artist.id}
-          id={artist.id}
-          heading={artist.name}
-          images={artist.images}
           altTitle={artist.name}
-          subheading="Artist"
+          heading={artist.name}
+          id={artist.id}
           imageRounded
+          images={artist.images}
+          key={artist.id}
+          subheading="Artist"
           type="artists"
         />
       ))}

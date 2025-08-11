@@ -1,8 +1,8 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import { getUserLibraryArtists } from "@/actions/get-user-artists";
 import { useSidebarStore } from "@/stores/sidebar-store";
-import { useQuery } from "@tanstack/react-query";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
 
@@ -25,8 +25,8 @@ export default function SidebarArtistsLibrary() {
 
   return data?.map((artist) => (
     <SidebarLibraryItem
-      key={"artist_" + artist.id}
       entity={artist}
+      key={`artist_${artist.id}`}
       type="artists"
     />
   ));

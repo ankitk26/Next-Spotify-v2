@@ -1,17 +1,17 @@
 import { getGreeting } from "@/lib/get-greeting";
 import RecentlyPlayed from "./recently-played";
-import UserTopTracks from "./user-top-tracks";
 import TimeCapsule from "./time-capsule";
 import TopArtists from "./top-artists";
+import UserTopTracks from "./user-top-tracks";
 
 export const metadata = {
   title: "Welcome to Spotify",
 };
 
-export default async function Home() {
+export default function Home() {
   return (
     <section className="flex flex-col items-start">
-      <h1 className="mb-5 text-3xl font-bold">Good {getGreeting()}</h1>
+      <h1 className="mb-5 font-bold text-3xl">Good {getGreeting()}</h1>
 
       <h1 className="mt-8">Top Tracks</h1>
       <UserTopTracks />

@@ -1,10 +1,10 @@
+import type { Metadata } from "next";
 import { getSearchItems } from "@/actions/get-search-items";
 import AlbumCards from "@/components/album-cards";
 import ArtistCards from "@/components/artist-cards";
 import PlaylistCards from "@/components/playlist-cards";
 import SearchFilters from "@/components/search-filters";
 import TracksTable from "@/components/tracks-table";
-import { Metadata } from "next";
 
 interface Props {
   params: Promise<{
@@ -36,13 +36,13 @@ export default async function SearchResults(props: Props) {
       <SearchFilters />
 
       {searchResults.tracks && searchResults.tracks.length > 0 && (
-        <div className="flex flex-col items-stretch -mt-8">
+        <div className="-mt-8 flex flex-col items-stretch">
           <h1 className="-mb-4">Tracks</h1>
           <TracksTable
-            tracks={searchResults.tracks}
             showAlbum
             showCover
             showSubtitle
+            tracks={searchResults.tracks}
           />
         </div>
       )}

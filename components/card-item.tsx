@@ -23,39 +23,31 @@ export default function CardItem({
   imageRounded = false,
   type,
 }: Props) {
-  // Render content with or without link based on type
-  const Content = () => (
-    <div className="h-full p-4 transition duration-300 rounded-lg cursor-pointer hover:bg-neutral-950 bg-neutral-900">
-      {images && images.length > 0 ? (
-        <Image
-          src={images[0].url}
-          alt={altTitle}
-          height={160}
-          width={160}
-          className={`aspect-square object-cover w-full ${
-            imageRounded ? "rounded-full" : "rounded-md"
-          }`}
-        />
-      ) : (
-        <div className="w-full h-40">
-          <Music className="w-full h-full bg-neutral-600" />
-        </div>
-      )}
-      <h3 className="mt-5 font-bold truncate">{heading}</h3>
-      {subheading && (
-        <h6 className="mt-1 text-xs font-semibold truncate text-neutral-500">
-          {subheading}
-        </h6>
-      )}
-    </div>
-  );
-
-  // Conditionally wrap with Link or return plain content
-  return type === "categories" ? (
-    <Content />
-  ) : (
+  return (
     <Link href={`/${type}/${id}`}>
-      <Content />
+      <div className="h-full cursor-pointer rounded-lg bg-neutral-900 p-4 transition duration-300 hover:bg-neutral-950">
+        {images && images.length > 0 ? (
+          <Image
+            alt={altTitle}
+            className={`aspect-square w-full object-cover ${
+              imageRounded ? "rounded-full" : "rounded-md"
+            }`}
+            height={160}
+            src={images[0].url}
+            width={160}
+          />
+        ) : (
+          <div className="h-40 w-full">
+            <Music className="h-full w-full bg-neutral-600" />
+          </div>
+        )}
+        <h3 className="mt-5 truncate font-bold">{heading}</h3>
+        {subheading && (
+          <h6 className="mt-1 truncate font-semibold text-neutral-500 text-xs">
+            {subheading}
+          </h6>
+        )}
+      </div>
     </Link>
   );
 }

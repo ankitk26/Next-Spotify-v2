@@ -1,11 +1,11 @@
 "use client";
 
+import DOMPurify from "dompurify";
 import parse, {
   attributesToProps,
+  type DOMNode,
   domToReact,
-  DOMNode,
 } from "html-react-parser";
-import DOMPurify from "dompurify";
 
 type CustomDOMNode = DOMNode & {
   name?: string;
@@ -19,7 +19,7 @@ export default function PlaylistDescription({
   description: string;
 }) {
   return (
-    <p className="font-medium mt-3 text-sm">
+    <p className="mt-3 font-medium text-sm">
       {parse(DOMPurify.sanitize(description), {
         replace: (domNode: DOMNode) => {
           // Type guard to check if node is a custom DOM node with name
@@ -35,8 +35,8 @@ export default function PlaylistDescription({
               <a
                 {...props}
                 className="text-blue-500 hover:underline"
-                target="_blank"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 {node.children ? domToReact(node.children) : null}
               </a>

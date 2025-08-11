@@ -16,7 +16,7 @@ export default async function ArtistTopTracks({
     <div className="mt-8">
       <h1>Popular</h1>
       <div className="-mt-8">
-        <TracksTable tracks={artistTopTracks} showCover />
+        <TracksTable showCover tracks={artistTopTracks} />
       </div>
     </div>
   );

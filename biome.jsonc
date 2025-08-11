@@ -1,0 +1,24 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "extends": ["ultracite"],
+  "linter": {
+    "rules": {
+      "suspicious": {
+        "noConsole": "warn"
+      },
+      "performance": {
+        "noImgElement": "warn",
+        "noNamespaceImport": "warn"
+      },
+      "nursery": {
+        "noAwaitInLoop": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double"
+    }
+  }
+}

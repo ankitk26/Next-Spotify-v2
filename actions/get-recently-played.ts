@@ -1,11 +1,11 @@
 "use server";
 
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getRequestWrapper } from "@/lib/get-request-wrapper";
-import { Track } from "@/types/types";
-import { headers } from "next/headers";
+import type { Track } from "@/types/types";
 
-export const getRecentlyPlayedTracks = async (limit: number = 50) => {
+export const getRecentlyPlayedTracks = async (limit = 50) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });

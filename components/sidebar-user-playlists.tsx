@@ -1,8 +1,8 @@
-import { getUserLibraryPlaylists } from "@/actions/get-user-playlists";
 import { useQuery } from "@tanstack/react-query";
+import { getUserLibraryPlaylists } from "@/actions/get-user-playlists";
+import { useSidebarStore } from "@/stores/sidebar-store";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
-import { useSidebarStore } from "@/stores/sidebar-store";
 
 export default function SidebarUserPlaylists() {
   const library = useSidebarStore((store) => store.library);
@@ -19,10 +19,10 @@ export default function SidebarUserPlaylists() {
 
   return data?.map((playlist) => (
     <SidebarLibraryItem
-      key={"playlist" + playlist.id}
       entity={playlist}
-      type="playlists"
+      key={`playlist${playlist.id}`}
       subtitle={playlist.owner.display_name}
+      type="playlists"
     />
   ));
 }

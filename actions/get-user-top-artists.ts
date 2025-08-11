@@ -1,9 +1,9 @@
 "use server";
 
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getRequestWrapper } from "@/lib/get-request-wrapper";
-import { Artist, Track } from "@/types/types";
-import { headers } from "next/headers";
+import type { Artist, Track } from "@/types/types";
 
 type Props = {
   timeRange?: "long_term" | "short_term" | "medium_term";

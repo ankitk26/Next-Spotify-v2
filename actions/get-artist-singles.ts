@@ -1,9 +1,9 @@
 "use server";
 
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getRequestWrapper } from "@/lib/get-request-wrapper";
-import { Album } from "@/types/types";
-import { headers } from "next/headers";
+import type { Album } from "@/types/types";
 
 export const getArtistSingles = async (artistId: string) => {
   const session = await auth.api.getSession({

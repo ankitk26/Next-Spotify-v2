@@ -1,4 +1,4 @@
-import { Album } from "../types/types";
+import type { Album } from "../types/types";
 import CardItem from "./card-item";
 import CardItemGrid from "./card-item-grid";
 
@@ -11,12 +11,12 @@ export default function AlbumCards({ albums }: Props) {
     <CardItemGrid>
       {albums?.map((album) => (
         <CardItem
-          key={album.id}
-          id={album.id}
-          heading={album.name}
-          subheading={album.artists[0].name}
           altTitle={album.name}
+          heading={album.name}
+          id={album.id}
           images={album.images}
+          key={album.id}
+          subheading={album.artists[0].name}
           type="albums"
         />
       ))}

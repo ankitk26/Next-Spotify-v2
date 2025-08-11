@@ -1,10 +1,10 @@
 "use server";
 
+import { betterFetch } from "@better-fetch/fetch";
+import type { Session } from "better-auth";
+import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { account } from "@/db/auth-schema";
-import { Session } from "better-auth";
-import { eq } from "drizzle-orm";
-import { betterFetch } from "@better-fetch/fetch";
 
 const getNewExpiryDate = (expiresIn: number) => {
   const currentTime = Date.now();

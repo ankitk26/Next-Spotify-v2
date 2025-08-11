@@ -1,6 +1,6 @@
-import { setSearchInput, useGlobalStore } from "@/stores/global-store";
 import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { setSearchInput, useGlobalStore } from "@/stores/global-store";
 
 export default function SearchInput() {
   const router = useRouter();
@@ -8,34 +8,34 @@ export default function SearchInput() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchInput != "") {
+    if (searchInput !== "") {
       router.push(`/search/${searchInput}`);
     }
   };
 
   return (
     <form
-      className="flex items-center justify-between w-1/2 gap-3 px-3 py-1.5 bg-white rounded-full"
+      className="flex w-1/2 items-center justify-between gap-3 rounded-full bg-white px-3 py-1.5"
       onSubmit={handleSubmit}
     >
       <Search className="text-neutral-800" />
 
       <input
-        className="flex-grow w-full text-sm font-semibold bg-transparent text-neutral-900 focus:outline-none"
-        placeholder="Artists, Songs, Playlists"
-        value={searchInput}
+        className="w-full flex-grow bg-transparent font-semibold text-neutral-900 text-sm focus:outline-none"
         onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Artists, Songs, Playlists"
         spellCheck={false}
+        value={searchInput}
       />
 
       <button
-        type="button"
         className={`flex items-center focus:outline-none ${
           searchInput ? "visible" : "invisible"
         }`}
         onClick={() => setSearchInput("")}
+        type="button"
       >
-        <X size={20} className="text-neutral-800 hover:text-neutral-600" />
+        <X className="text-neutral-800 hover:text-neutral-600" size={20} />
       </button>
     </form>
   );

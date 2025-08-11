@@ -1,13 +1,13 @@
 "use client";
 
-import { getLikedSongs } from "@/actions/get-liked-songs";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SideBarSkeleton from "./sidebar-skeleton";
+import { getLikedSongs } from "@/actions/get-liked-songs";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/stores/sidebar-store";
+import SideBarSkeleton from "./sidebar-skeleton";
 
 export default function SidebarLikedSongs() {
   const pathname = usePathname();
@@ -28,25 +28,25 @@ export default function SidebarLikedSongs() {
 
   return (
     <Link
-      href="/collection/tracks"
       className={cn(
-        "flex items-center p-2 gap-3 rounded-md text-white cursor-pointer hover:bg-neutral-800",
+        "flex cursor-pointer items-center gap-3 rounded-md p-2 text-white hover:bg-neutral-800",
         pathname === "/collection/tracks" ? "bg-neutral-600" : ""
       )}
+      href="/collection/tracks"
     >
       <Image
-        src="https://res.cloudinary.com/drnu1myuq/image/upload/v1754937393/liked_cover_x3ach0.jpg"
-        height={50}
-        width={50}
-        className="rounded-md"
         alt="Liked playlist cover"
+        className="rounded-md"
+        height={50}
+        src="https://res.cloudinary.com/drnu1myuq/image/upload/v1754937393/liked_cover_x3ach0.jpg"
+        width={50}
       />
 
       <div className="truncate">
-        <h6 className="w-full text-sm font-semibold truncate hover:text-white">
+        <h6 className="w-full truncate font-semibold text-sm hover:text-white">
           Liked Songs
         </h6>
-        <span className="mt-1 text-xs font-medium text-neutral-500">
+        <span className="mt-1 font-medium text-neutral-500 text-xs">
           {likedSongsCount} songs
         </span>
       </div>

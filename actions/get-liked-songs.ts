@@ -1,9 +1,9 @@
 "use server";
 
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getRequestWrapper } from "@/lib/get-request-wrapper";
-import { Track } from "@/types/types";
-import { headers } from "next/headers";
+import type { Track } from "@/types/types";
 
 export type LikedSongs = {
   total: number;

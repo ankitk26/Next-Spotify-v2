@@ -1,12 +1,12 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: ignore this rule */
 "use client";
 
-import { formatMs } from "@/lib/format-ms";
-import { cn } from "@/lib/utils";
-import { Track } from "@/types/types";
 import { Clock3, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { formatMs } from "@/lib/format-ms";
+import { cn } from "@/lib/utils";
+import type { Track } from "@/types/types";
 
 interface Props {
   tracks: Track[];
@@ -23,8 +23,6 @@ export default function TracksTable({
   showHeader = false,
   showAlbum = false,
 }: Props) {
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-
   return (
     <div className="mt-8">
       {/* Table Header */}
@@ -32,13 +30,13 @@ export default function TracksTable({
       {showHeader && (
         <>
           <header className="grid grid-cols-12 gap-2 p-4 pb-1 text-neutral-400">
-            <div className="col-span-1 font-semibold tracking-wider text-left uppercase">
+            <div className="col-span-1 text-left font-semibold uppercase tracking-wider">
               #
             </div>
 
             <div
               className={cn(
-                "text-sm font-semibold text-left",
+                "text-left font-semibold text-sm",
                 showAlbum ? "col-span-6" : "col-span-10"
               )}
             >
@@ -46,80 +44,76 @@ export default function TracksTable({
             </div>
 
             {showAlbum && (
-              <div className="col-span-4 text-sm font-semibold text-left">
+              <div className="col-span-4 text-left font-semibold text-sm">
                 Album
               </div>
             )}
 
-            <div className="col-span-1 font-semibold text-left">
+            <div className="col-span-1 text-left font-semibold">
               <Clock3 size={16} />
             </div>
           </header>
 
           {/* Divider */}
-          <div className="col-span-12 border-b border-neutral-900"></div>
+          <div className="col-span-12 border-neutral-900 border-b" />
         </>
       )}
 
       {/* Table Rows */}
-
-      <div className="w-full col-span-12 mt-2">
+      <div className="col-span-12 mt-2 w-full">
         {tracks
           ?.filter((track) => track.name.trim().length > 0)
           .map((track, index) => (
             <div
-              className={cn(
-                "grid py-2 px-4 rounded-lg grid-cols-12",
-                hoveredRow === index ? "bg-neutral-900" : "bg-transparent"
-              )}
-              key={track.id + index + 1}
-              onMouseEnter={() => setHoveredRow(index)}
-              onMouseLeave={() => setHoveredRow(null)}
+              className="grid grid-cols-12 rounded-lg bg-transparent px-4 py-2 hover:bg-neutral-800"
+              key={track.id + String(index)}
             >
-              <span className="flex items-center col-span-1 text-sm text-neutral-400">
+              <span className="col-span-1 flex items-center text-neutral-400 text-sm">
                 {index + 1}
               </span>
 
               <div
                 className={cn(
-                  "flex items-center w-full",
+                  "flex w-full items-center",
                   showAlbum ? "col-span-6" : "col-span-10"
                 )}
               >
-                <div className="flex items-center w-full gap-4">
+                <div className="flex w-full items-center gap-4">
                   {showCover &&
                     (track.album.images && track.album.images.length > 0 ? (
-                      <div className="flex-shrink-0 w-10 h-10">
+                      <div className="h-10 w-10 flex-shrink-0">
                         <Image
-                          src={track.album.images?.[0].url as string}
                           alt={track.name}
+                          className="h-10 w-10 rounded object-contain"
                           height={40}
+                          src={track.album.images?.[0].url as string}
                           width={40}
-                          className="object-contain w-10 h-10 rounded"
                         />
                       </div>
                     ) : (
                       <Music
+                        className="h-10 w-10 rounded bg-neutral-900 p-2"
                         size={16}
-                        className="w-10 h-10 p-2 rounded bg-neutral-900"
                       />
                     ))}
 
-                  <div className="w-full pr-3 truncate">
-                    <span className="w-10/12 text-sm font-medium truncate">
+                  <div className="w-full truncate pr-3">
+                    <span className="w-10/12 truncate font-medium text-sm">
                       {track.name}
                     </span>
 
                     {showSubtitle && (
-                      <div className="flex flex-wrap items-center w-full gap-1 pr-3 text-sm text-neutral-400">
+                      <div className="flex w-full flex-wrap items-center gap-1 pr-3 text-neutral-400 text-sm">
                         <span className="truncate">
-                          {track.artists.map((artist, index) => (
+                          {track.artists.map((artist, artistIndex) => (
                             <Link
-                              key={artist.id + track.id}
-                              href={`/artists/${artist.id}`}
                               className="hover:text-white hover:underline"
+                              href={`/artists/${artist.id}`}
+                              key={artist.id + track.id}
                             >
-                              {index !== 0 ? `, ${artist.name}` : artist.name}
+                              {artistIndex !== 0
+                                ? `, ${artist.name}`
+                                : artist.name}
                             </Link>
                           ))}
                         </span>
@@ -130,17 +124,17 @@ export default function TracksTable({
               </div>
 
               {showAlbum && (
-                <div className="flex items-center w-10/12 col-span-4 text-sm text-neutral-400">
+                <div className="col-span-4 flex w-10/12 items-center text-neutral-400 text-sm">
                   <Link
-                    href={`/albums/${track.album.id}`}
                     className="truncate hover:text-white hover:underline"
+                    href={`/albums/${track.album.id}`}
                   >
                     {track.album.name}
                   </Link>
                 </div>
               )}
 
-              <small className="flex items-center col-span-1 text-sm font-medium text-neutral-400 ">
+              <small className="col-span-1 flex items-center font-medium text-neutral-400 text-sm ">
                 {formatMs(track.duration_ms)}
               </small>
             </div>

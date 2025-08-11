@@ -10,13 +10,13 @@ export default function SideBarSkeleton(
   const library = useSidebarStore((store) => store.library);
 
   return (
-    <div className="flex flex-col items-stretch gap-3 mt-4">
-      {...Array(count).map((i) => (
+    <div className="mt-4 flex flex-col items-stretch gap-3">
+      {new Array(count).fill(null).map((_, i) => (
         <div
           className={cn(
-            "flex items-center p-2 gap-3 rounded-xl cursor-pointer bg-neutral-900"
+            "flex cursor-pointer items-center gap-3 rounded-xl bg-neutral-900 p-2"
           )}
-          key={i + "_random_" + library}
+          key={`${i}_random_${library}`}
         >
           {/* Skeleton for Image */}
           <Skeleton
@@ -26,9 +26,9 @@ export default function SideBarSkeleton(
             )}
           />
 
-          <div className="flex flex-col w-full">
+          <div className="flex w-full flex-col">
             {/* Skeleton for Title */}
-            <Skeleton className="h-4 w-3/4 mb-2" />
+            <Skeleton className="mb-2 h-4 w-3/4" />
             {/* Skeleton for Subtitle (Only for Albums and Playlists) */}
             {library !== "artists" && <Skeleton className="h-3 w-1/2" />}
           </div>

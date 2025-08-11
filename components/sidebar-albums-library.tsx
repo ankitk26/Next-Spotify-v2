@@ -1,8 +1,8 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import { getUserLibraryAlbums } from "@/actions/get-user-albums";
 import { useSidebarStore } from "@/stores/sidebar-store";
-import { useQuery } from "@tanstack/react-query";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
 
@@ -25,12 +25,12 @@ export default function SidebarAlbumsLibrary() {
 
   return data?.map((album) => (
     <SidebarLibraryItem
-      key={"album_" + album.album.id}
       entity={album.album}
-      type="albums"
+      key={`album_${album.album.id}`}
       subtitle={
         album.album.artists.length > 0 ? album.album.artists[0].name : ""
       }
+      type="albums"
     />
   ));
 }

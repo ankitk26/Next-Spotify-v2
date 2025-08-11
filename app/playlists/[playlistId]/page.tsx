@@ -1,8 +1,8 @@
-import { getPlaylistById } from "@/actions/get-playlist-by-id";
-import TracksTable from "@/components/tracks-table";
 import { Dot, Music } from "lucide-react";
 import Image from "next/image";
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
+import { getPlaylistById } from "@/actions/get-playlist-by-id";
+import TracksTable from "@/components/tracks-table";
 import PlaylistDescription from "./playlist-description";
 
 type Props = {
@@ -32,28 +32,28 @@ export default async function PlaylistPage(props: Props) {
           <>
             {playlist.images.length > 0 ? (
               <Image
-                src={playlist.images[0].url}
                 alt={playlist.name}
+                className="h-60 w-60 rounded-sm object-contain"
                 height={240}
-                width={240}
-                className="object-contain rounded-sm w-60 h-60"
                 priority
+                src={playlist.images[0].url}
+                width={240}
               />
             ) : (
-              <div className="w-full h-40">
-                <Music size={160} className="w-full h-full bg-neutral-800" />
+              <div className="h-40 w-full">
+                <Music className="h-full w-full bg-neutral-800" size={160} />
               </div>
             )}
 
             <div className="flex flex-col gap-3">
-              <h5 className="text-xs font-bold uppercase">{playlist.type}</h5>
-              <h2 className="text-6xl font-bold">{playlist.name}</h2>
+              <h5 className="font-bold text-xs uppercase">{playlist.type}</h5>
+              <h2 className="font-bold text-6xl">{playlist.name}</h2>
 
               {playlist.description && (
                 <PlaylistDescription description={playlist.description} />
               )}
 
-              <div className="flex items-center text-sm font-semibold">
+              <div className="flex items-center font-semibold text-sm">
                 <span>{playlist.owner?.display_name}</span>
                 {playlist.followers.total > 0 && (
                   <>
@@ -79,11 +79,11 @@ export default async function PlaylistPage(props: Props) {
       <div className="mt-5">
         {playlist?.tracks && (
           <TracksTable
-            tracks={playlist?.tracks.filter((track) => track !== null)}
             showAlbum
             showCover
             showHeader
             showSubtitle
+            tracks={playlist?.tracks.filter((track) => track !== null)}
           />
         )}
       </div>

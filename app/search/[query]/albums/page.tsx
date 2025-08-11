@@ -1,7 +1,7 @@
+import type { Metadata } from "next/types";
 import { getSearchItems } from "@/actions/get-search-items";
 import AlbumCards from "@/components/album-cards";
 import SearchFilters from "@/components/search-filters";
-import { Metadata } from "next/types";
 
 type Props = {
   params: Promise<{

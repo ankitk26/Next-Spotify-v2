@@ -1,9 +1,9 @@
 "use server";
 
-import { headers } from "next/headers";
 import { betterFetch } from "@better-fetch/fetch";
-import { auth } from "./auth";
+import { headers } from "next/headers";
 import { spotifyApiBaseUrl } from "@/constants/constants";
+import { auth } from "./auth";
 
 export const getRequestWrapper = async <T = unknown>(endpoint: string) => {
   const session = await auth.api.getSession({

@@ -1,6 +1,6 @@
 import "@/app/globals.css";
-import { Montserrat } from "next/font/google";
 import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 
 const fontFamily = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -17,9 +17,7 @@ export default function LoginPageLayout({
   return (
     <html lang="en">
       <body
-        className={
-          fontFamily.variable + " h-screen w-screen text-white bg-neutral-900"
-        }
+        className={`${fontFamily.variable} h-screen w-screen bg-neutral-900 text-white`}
       >
         <main>{children}</main>
       </body>

@@ -1,9 +1,9 @@
-import { getLikedSongs } from "@/actions/get-liked-songs";
-import TracksTable from "@/components/tracks-table";
-import { auth } from "@/lib/auth";
 import { Dot } from "lucide-react";
 import { headers } from "next/headers";
 import Image from "next/image";
+import { getLikedSongs } from "@/actions/get-liked-songs";
+import TracksTable from "@/components/tracks-table";
+import { auth } from "@/lib/auth";
 
 export const metadata = {
   title: "Spotify - Liked Songs",
@@ -20,17 +20,17 @@ export default async function LikedTracksPage() {
     <>
       <div className="flex items-end gap-6">
         <Image
-          src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
           alt="Liked Songs"
           height={208}
-          width={208}
           priority
+          src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
+          width={208}
         />
         <div className="flex flex-col gap-3">
-          <h5 className="text-sm font-bold">Playlist</h5>
-          <h2 className="mt-2 text-6xl font-bold">Liked Songs</h2>
+          <h5 className="font-bold text-sm">Playlist</h5>
+          <h2 className="mt-2 font-bold text-6xl">Liked Songs</h2>
 
-          <div className="flex items-center text-sm font-semibold">
+          <div className="flex items-center font-semibold text-sm">
             <span>{session?.user.name}</span>
             {likedTracks.total > 0 && (
               <>
@@ -44,11 +44,11 @@ export default async function LikedTracksPage() {
 
       {likedTracks.items && (
         <TracksTable
-          tracks={likedTracks.items}
-          showHeader
           showAlbum
           showCover
+          showHeader
           showSubtitle
+          tracks={likedTracks.items}
         />
       )}
     </>

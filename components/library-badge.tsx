@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import {
-  SidebarLibrary,
+  type SidebarLibrary,
   updateSidebarLibrary,
   useSidebarStore,
 } from "@/stores/sidebar-store";
@@ -13,12 +13,13 @@ export default function LibraryBadge({ type }: { type: SidebarLibrary }) {
   return (
     <button
       className={cn(
-        "py-2 px-3 transition-colors cursor-pointer rounded-full",
+        "cursor-pointer rounded-full px-3 py-2 transition-colors",
         type === library
           ? "bg-white text-neutral-900"
-          : "bg-neutral-800 hover:bg-neutral-600 text-white"
+          : "bg-neutral-800 text-white hover:bg-neutral-600"
       )}
       onClick={() => updateSidebarLibrary(type)}
+      type="button"
     >
       {type[0].toUpperCase().concat(type.substring(1))}
     </button>

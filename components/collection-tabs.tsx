@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const collectionTabs = ["playlists", "artists", "albums"];
 
@@ -15,7 +15,7 @@ export default function CollectionTabs() {
         <Link href={`/collection/${tab}`} key={tab}>
           <span
             className={cn(
-              "text-white rounded capitalize text-sm font-bold px-6 py-3",
+              "rounded px-6 py-3 font-bold text-sm text-white capitalize",
               pathname === `/collection/${tab}`
                 ? "bg-neutral-800"
                 : "bg-transparent"

@@ -1,9 +1,9 @@
-import { getAlbumById } from "@/actions/get-album-by-id";
-import TracksTable from "@/components/tracks-table";
 import { Dot, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from "next/types";
+import type { Metadata } from "next/types";
+import { getAlbumById } from "@/actions/get-album-by-id";
+import TracksTable from "@/components/tracks-table";
 
 type Props = {
   params: Promise<{
@@ -32,28 +32,28 @@ export default async function AlbumPage(props: Props) {
           <>
             {album.images && album.images.length > 0 ? (
               <Image
-                src={album.images[0].url as string}
                 alt={album.name}
+                className="aspect-square h-52 w-52 rounded-sm object-cover"
                 height={208}
-                width={208}
-                className="object-cover rounded-sm aspect-square w-52 h-52"
                 priority
+                src={album.images[0].url as string}
+                width={208}
               />
             ) : (
-              <div className="w-full h-40">
-                <Music size={160} className="w-full h-full" />
+              <div className="h-40 w-full">
+                <Music className="h-full w-full" size={160} />
               </div>
             )}
             <div className="flex flex-col gap-3">
-              <h5 className="text-xs font-bold uppercase">
+              <h5 className="font-bold text-xs uppercase">
                 {album.album_type}
               </h5>
-              <h2 className="text-5xl font-bold">{album.name}</h2>
+              <h2 className="font-bold text-5xl">{album.name}</h2>
 
-              <div className="flex items-center text-sm font-semibold">
+              <div className="flex items-center font-semibold text-sm">
                 <Link
-                  href={`/artists/${album.artists[0].id}`}
                   className="hover:underline"
+                  href={`/artists/${album.artists[0].id}`}
                 >
                   {album.artists[0].name}
                 </Link>
@@ -72,9 +72,9 @@ export default async function AlbumPage(props: Props) {
       </div>
 
       <TracksTable
-        tracks={album ? album.tracks.items : []}
         showHeader
         showSubtitle
+        tracks={album ? album.tracks.items : []}
       />
     </>
   );

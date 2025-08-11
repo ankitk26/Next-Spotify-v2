@@ -1,8 +1,8 @@
-import { db } from "@/db";
-import { account, session, user, verification } from "@/db/auth-schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { customSession } from "better-auth/plugins";
+import { db } from "@/db";
+import { account, session, user, verification } from "@/db/auth-schema";
 import { getAccessToken } from "./get-access-token";
 
 export const auth = betterAuth({
@@ -42,15 +42,15 @@ export const auth = betterAuth({
   },
 
   plugins: [
-    customSession(async ({ session, user }) => {
-      const accessToken = await getAccessToken(session);
+    customSession(async ({ session: authSession, user: authUser }) => {
+      const accessToken = await getAccessToken(authSession);
 
       return {
         user: {
-          ...user,
+          ...authUser,
           accessToken,
         },
-        session,
+        session: authSession,
       };
     }),
   ],
