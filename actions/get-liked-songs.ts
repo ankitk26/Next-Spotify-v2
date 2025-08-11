@@ -45,7 +45,7 @@ export const getLikedSongs = async () => {
   }
 
   return {
-    total: data.total,
-    items: data.items.map((item) => item.track),
+    total: data?.total,
+    items: data?.items?.map((item) => item.track),
   };
 };
