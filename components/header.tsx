@@ -20,7 +20,7 @@ export default function Header() {
       <div className="flex items-center gap-10">
         <Link href="/">
           <Image
-            src="/images/spotify_logo.png"
+            src="https://res.cloudinary.com/drnu1myuq/image/upload/v1754937393/spotify_logo_xmxgc6.png"
             width={125}
             height={50}
             alt="Spotify logo"

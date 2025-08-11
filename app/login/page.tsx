@@ -13,7 +13,7 @@ export default function Login() {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-12">
       <Image
-        src="/images/spotify_logo.png"
+        src="https://res.cloudinary.com/drnu1myuq/image/upload/v1754937393/spotify_logo_xmxgc6.png"
         alt="spotify logo"
         width={320}
         height={96}
