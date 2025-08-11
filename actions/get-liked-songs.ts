@@ -45,7 +45,8 @@ export const getLikedSongs = async () => {
   }
 
   return {
-    total: data?.total,
-    items: data?.items?.map((item) => item.track),
+    total: data.total,
+    // adding below type due to failure in build failure in vercel for some reason
+    items: data.items.map((item: { track: Track }) => item.track),
   };
 };
