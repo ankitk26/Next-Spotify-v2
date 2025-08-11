@@ -17,5 +17,5 @@ export const getRecentlyPlayedTracks = async (limit = 50) => {
     `/me/player/recently-played?limit=${limit}`
   );
 
-  return data?.items.map((item) => item.track);
+  return data?.items.map((item: { track: Track }) => item.track);
 };

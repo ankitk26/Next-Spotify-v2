@@ -21,7 +21,9 @@ export const getPlaylistById = async (playlistId: string) => {
 
   const playlist = {
     ...data,
-    tracks: data.tracks.items.map((item) => item.track),
+    tracks: data.tracks.items.map(
+      (item: { added_at: string; track: Track }) => item.track
+    ),
   };
 
   let currUrl = data.tracks.next;
@@ -32,7 +34,9 @@ export const getPlaylistById = async (playlistId: string) => {
       next?: string;
     }>(currUrl as string);
     if (nextData) {
-      playlist.tracks.push(...nextData.items.map((item) => item.track));
+      playlist.tracks.push(
+        ...nextData.items.map((item: { track: Track }) => item.track)
+      );
     }
     currUrl = nextData?.next;
   }
