@@ -134,7 +134,7 @@ export default function TracksTable({
                 </div>
               )}
 
-              <small className="col-span-1 flex items-center font-medium text-neutral-400 text-sm ">
+              <small className="col-span-1 flex items-center font-medium text-neutral-400 text-sm">
                 {formatMs(track.duration_ms)}
               </small>
             </div>

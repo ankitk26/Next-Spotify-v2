@@ -1,24 +1,11 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
-  "extends": ["ultracite"],
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/core", "ultracite/react", "ultracite/next"],
   "linter": {
     "rules": {
-      "suspicious": {
-        "noConsole": "warn"
-      },
-      "performance": {
-        "noImgElement": "warn",
-        "noNamespaceImport": "warn"
-      },
-      "nursery": {
-        "noAwaitInLoop": "off"
+      "style": {
+        "useConsistentTypeDefinitions": "off"
       }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double",
-      "jsxQuoteStyle": "double"
     }
   }
 }
