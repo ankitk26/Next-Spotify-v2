@@ -1,10 +1,11 @@
+import type { Metadata } from "next";
 import { getGreeting } from "@/lib/get-greeting";
 import RecentlyPlayed from "./recently-played";
 import TimeCapsule from "./time-capsule";
 import TopArtists from "./top-artists";
 import UserTopTracks from "./user-top-tracks";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Welcome to Spotify",
 };
 

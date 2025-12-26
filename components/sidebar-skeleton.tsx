@@ -21,7 +21,7 @@ export default function SideBarSkeleton(
           {/* Skeleton for Image */}
           <Skeleton
             className={cn(
-              "h-[50px] w-[50px]",
+              "size-12.5",
               library === "artists" ? "rounded-full" : "rounded-md"
             )}
           />

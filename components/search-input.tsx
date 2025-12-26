@@ -21,7 +21,7 @@ export default function SearchInput() {
       <Search className="text-neutral-800" />
 
       <input
-        className="w-full flex-grow bg-transparent font-semibold text-neutral-900 text-sm focus:outline-none"
+        className="w-full grow bg-transparent font-semibold text-neutral-900 text-sm focus:outline-none"
         onChange={(e) => setSearchInput(e.target.value)}
         placeholder="Artists, Songs, Playlists"
         spellCheck={false}

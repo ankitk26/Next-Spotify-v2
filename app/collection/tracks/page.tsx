@@ -1,11 +1,12 @@
 import { Dot } from "lucide-react";
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { getLikedSongs } from "@/actions/get-liked-songs";
 import TracksTable from "@/components/tracks-table";
 import { auth } from "@/lib/auth";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Spotify - Liked Songs",
   description: "Songs liked by you",
 };
