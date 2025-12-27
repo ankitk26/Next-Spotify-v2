@@ -8,12 +8,9 @@ import SideBarSkeleton from "./sidebar-skeleton";
 export default function SidebarArtistsLibrary() {
   const library = useSidebarStore((store) => store.library);
 
-  const { data, isPending } = trpc.spotify.library.artists.useQuery(
-    undefined,
-    {
-      enabled: library === "artists",
-    }
-  );
+  const { data, isPending } = trpc.spotify.library.artists.useQuery(undefined, {
+    enabled: library === "artists",
+  });
 
   if (library !== "artists") {
     return null;

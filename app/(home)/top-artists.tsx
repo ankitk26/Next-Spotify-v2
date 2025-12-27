@@ -11,8 +11,9 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function TopArtists() {
-  const { data: topArtists, isPending } =
-    trpc.spotify.user.topArtists.useQuery({ limit: 15 });
+  const { data: topArtists, isPending } = trpc.spotify.user.topArtists.useQuery(
+    { limit: 15 }
+  );
 
   if (isPending) {
     return (

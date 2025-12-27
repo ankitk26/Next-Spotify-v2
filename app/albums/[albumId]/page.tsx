@@ -12,8 +12,9 @@ export default function AlbumPage() {
   const params = useParams();
   const albumId = params.albumId as string;
 
-  const { data: album, isPending } =
-    trpc.spotify.album.byId.useQuery({ albumId });
+  const { data: album, isPending } = trpc.spotify.album.byId.useQuery({
+    albumId,
+  });
 
   if (isPending) {
     return (

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../init";
 import type { Album } from "@/types/types";
+import { publicProcedure, router } from "../init";
 
 export const albumRouter = router({
   byId: publicProcedure
@@ -12,7 +12,9 @@ export const albumRouter = router({
       const data = await ctx.getRequestWrapper<Album>(
         `/albums/${input.albumId}`
       );
+      if (!data) {
+        throw new Error("Album not found");
+      }
       return data;
     }),
 });
-

@@ -8,8 +8,9 @@ import { trpc } from "@/lib/trpc/react";
 const SKELETON_KEYS = Array.from({ length: 9 }, (_, i) => `skeleton-${i}`);
 
 export default function UserTopTracks() {
-  const { data: topTracks, isPending } =
-    trpc.spotify.user.topTracks.useQuery({ limit: 9 });
+  const { data: topTracks, isPending } = trpc.spotify.user.topTracks.useQuery({
+    limit: 9,
+  });
 
   if (isPending) {
     return (

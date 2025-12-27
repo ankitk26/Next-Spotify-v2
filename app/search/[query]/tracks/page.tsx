@@ -9,8 +9,9 @@ export default function TrackSearchResultPage() {
   const params = useParams();
   const query = decodeURIComponent(params.query as string);
 
-  const { data: searchResults, isPending } =
-    trpc.spotify.search.items.useQuery({ type: "track", query, limit: 50 });
+  const { data: searchResults, isPending } = trpc.spotify.search.items.useQuery(
+    { type: "track", query, limit: 50 }
+  );
 
   if (isPending) {
     return (

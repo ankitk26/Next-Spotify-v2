@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../init";
 import type { Artist, Track } from "@/types/types";
+import { publicProcedure, router } from "../init";
 
 type ResponseData<T extends "artists" | "tracks"> = {
   items: T extends "artists" ? Artist[] : Track[];
@@ -54,7 +54,7 @@ export const userRouter = router({
       const data = await ctx.getRequestWrapper<{ items: { track: Track }[] }>(
         `/me/player/recently-played?limit=${input.limit}`
       );
-      return data?.items.map((item: { track: Track }) => item.track);
+      return data?.items?.map((item: { track: Track }) => item.track) ?? [];
     }),
 
   timeCapsule: publicProcedure
@@ -69,4 +69,3 @@ export const userRouter = router({
       return data?.items;
     }),
 });
-
