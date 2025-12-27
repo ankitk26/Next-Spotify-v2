@@ -1,23 +1,27 @@
-import { betterFetch } from "@better-fetch/fetch";
-import type { Session, User } from "better-auth";
 import { type NextRequest, NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 
 export async function proxy(request: NextRequest) {
-  const { data: session } = await betterFetch<{ session: Session; user: User }>(
-    "/api/auth/get-session",
-    {
-      baseURL: request.nextUrl.origin,
-      headers: {
-        cookie: request.headers.get("cookie") || "",
-      },
-    }
-  );
+  try {
+    // Convert NextRequest headers to Headers object for better-auth
+    const headers = new Headers();
+    request.headers.forEach((value, key) => {
+      headers.set(key, value);
+    });
 
-  if (!session) {
+    const session = await auth.api.getSession({
+      headers,
+    });
+
+    if (!session) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    return NextResponse.next();
+  } catch {
+    // If there's an error getting the session, redirect to login
     return NextResponse.redirect(new URL("/login", request.url));
   }
-
-  return NextResponse.next();
 }
 
 export const config = {
