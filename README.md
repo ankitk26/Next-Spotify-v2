@@ -1,5 +1,3 @@
-
-
 # Next-Spotify v2
 
 <img src="https://images.unsplash.com/photo-1567535343163-9bba0f61bd09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="sample intro image" width="700" />
@@ -7,77 +5,58 @@
 <small>Source: [Agê Barros](https://unsplash.com/photos/fK8n4RwGuEI)</small>
 
 <br>
-Next Spotify v2 is a Spotify clone built using Next.js and TailwindCSS. Users can log in with their Spotify account and view the playlists, artists, and albums followed by them.
-
+Next Spotify v2 is a modern Spotify clone built using React 19 and Next.js 16. It leverages a robust backend stack with Drizzle ORM and Better Auth to provide a seamless music browsing experience.
 
 Working demo for the project - [Link](https://next-spotify-smoky-v2.vercel.app)
 
-<b>Note </b>: Currently users cannot log in to the demo link. The application would work in the local system.
+<b>Note </b>: Currently, users cannot log in to the demo link due to Spotify's API Developer quota limits. The application is intended for local development and testing.
 
 ## Table of contents
 
 - [Technologies and Libraries used](#technologies)
-- [Migration](#migration)
 - [Features](#features)
 - [To-do features](#todo)
 - [Run locally](#run_locally)
 - [Environment variables](#env)
-- [Data flow](#data_flow)
 - [API Reference](#api)
-- [Screenshots](#screenshots)
 - [Resources](#resources)
-
 
 <section id="technologies" />
 
 ## Technologies and Libraries used
 
-- [Next.JS 13](https://nextjs.org/)
-- [NextAuth.js](https://next-auth.js.org/)
-- [Typescript](https://www.typescriptlang.org/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [Radix UI](https://www.radix-ui.com/)
+- [Next.js 16 (App Router)](https://nextjs.org/)
+- [React 19](https://react.dev/)
+- [Better Auth](https://www.better-auth.com/)
+- [Drizzle ORM](https://orm.drizzle.team/) & [Postgres](https://postgresjs.org/)
+- [TanStack Query v5](https://tanstack.com/query/latest)
+- [Tailwind CSS v4](https://tailwindcss.com/)
 - [Zustand](https://zustand-demo.pmnd.rs/)
-
-
-<section id="migration" />
-
-## Migration from Next-Spotify v1 to Next-Spotify v2
-
-- Migrating from pages directory to app directory
-- Shifting from getServerSideProps to async calls in server components
-- Uniformity in usage of colors than v1
-- Updated UI
-- Use of both server components and client components together
-- Separate root layouts for different groups of pages
+- [Biome](https://biomejs.dev/) (Linting & Formatting)
 
 <section id="features"/>
 
 ## Features
 
-- Spotify OAuth for authentication
+- Spotify OAuth for authentication via Better Auth
+- Persistent user sessions and data storage with Postgres
 - View user's top tracks and artists based on listening frequency
 - Display user's top tracks of all time
 - View recently played tracks
-- See recommendations for a track based on Spotify API's audio analysis features
-- View all the playlists created or followed by the user
-- View liked songs playlist of the user
-- View artists and albums followed by the user
-- Display all the tracks in a playlist, an album, or of an artist
-- Play a track with play/pause controller
+- Spotify API audio analysis recommendations for tracks
+- View all playlists, liked songs, followed artists, and albums
+- Play tracks with real-time play/pause controllers
 - Search for any playlist, artist, album, or track
 - Browse music based on categories (eg: Rock, Indie, Hip-Hop)
-- Show latest releases
+- Optimized performance and caching with TanStack Query
 
 <section id="todo" />
 
 ## To-do features
 
-- [ ] Add colors to headers
-- [ ] Improve track player
-- [ ] Shuffle play or play all tracks in album or playlist
+- [ ] Add dynamic colors to headers based on album art
+- [ ] Implement robust error boundaries for API rate limiting
 
-*Any other features can be suggested under the issues section of the repo*
 <section id="run_locally"/>
 
 ## Run Locally
@@ -85,121 +64,63 @@ Working demo for the project - [Link](https://next-spotify-smoky-v2.vercel.app)
 Clone the project
 
 ```bash
-  git clone https://github.com/ankitk26/Next-Spotify-v2.git
-```
-
-Go to the project directory
-
-```bash
-  cd Next-spotify-v2
+git clone https://github.com/ankitk26/Next-Spotify-v2.git
+cd Next-spotify-v2
 ```
 
 Install dependencies
 
 ```bash
-  npm install
-  # or
-  yarn
+npm install
 ```
 
-
-Start the server
+Push database schema
 
 ```bash
-  npm run dev
-  # or
-  yarn dev
+npx drizzle-kit push
 ```
 
+Start the development server
+
+```bash
+npm run dev
+```
 
 <section id="env"/>
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your `.env` file:
+
+`DATABASE_URL` (Postgres Connection String)
 
 `SPOTIFY_CLIENT_SECRET`
 
 `SPOTIFY_CLIENT_ID`
 
-`NEXTAUTH_URL`= http://localhost:3000
+`BETTER_AUTH_SECRET`
 
-`NEXTAUTH_SECRET`
+`BETTER_AUTH_URL`=http://localhost:3000
 
 #### Spotify API credentials
 
-- **Step 1**: Go to the [Spotify's developer dashboard](https://developer.spotify.com/dashboard/) and log in with your Spotify credentials
-- **Step 2**: Click on **CREATE AN APP** button on the applications page. Enter the name and description for the application.
-- **Step 3**: After creating the application, copy the **Client ID** and **Client Secret** and paste it into the .env file.
-- **Step 4**: In the application page itself, click on **Edit Settings** button. Under the **Redirect URIs** section, add the redirect URL in the text field provided as follows:
-
-  `http://localhost:3000/api/auth/callback/spotify`
-
-  When the project is deployed, add another redirect URL as follows:
-
-  `https://xyz.domain/api/auth/callback/spotify`
-- **Step 5**: In the **Users and Access** page, add the email addresses for the accounts you want to test the application for. Your own account is enabled by default so no there's no need to add your own account's email.
-
-#### NEXTAUTH_SECRET
-
-To create a secret key, open your terminal, run the command below and copy the value generated to the .env file.
-
-~~~bash
-openssl rand -base64 32
-~~~
-
-
-<section id="data_flow"/>
-
-## Data flow
-
-<img src="https://cdn-images-1.medium.com/max/1000/1*wRT-57cGgmzJETq19SkVqA.png" alt="data flow" />
+1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/).
+2. Create an App and copy the **Client ID** and **Client Secret**.
+3. Set the Redirect URI to:
+   `http://localhost:3000/api/auth/callback/spotify`
 
 <section id="api"/>
 
 ## API Reference
 
-The API endpoints and their response are listed in [https://developer.spotify.com/documentation/web-api](https://developer.spotify.com/documentation/web-api)
-
-<section id="screenshots"/>
-
-## Screenshots
-
-**Home page**
-
-![2023-06-20 18_46_00-](https://github.com/ankitk26/Next-Spotify-v2/assets/53444460/68dc7e35-54ae-4db1-b199-b0ec8988aa21)
-
-<br><br>
-
-**Browse categories**
-
-![Screenshot 2023-06-20 184858](https://github.com/ankitk26/Next-Spotify-v2/assets/53444460/19f6f716-516d-44e4-8e7a-10bbbbfe6326)
-
-<br><br>
-
-**Search**
-
-![Screenshot 2023-06-20 185206](https://github.com/ankitk26/Next-Spotify-v2/assets/53444460/4958fcae-a41c-40f2-a8b1-4978122c3419)
-
-
-<br><br>
-
-**View Artist**
-
-![Screenshot 2023-06-20 185257](https://github.com/ankitk26/Next-Spotify-v2/assets/53444460/76c712a6-dfc0-4b15-8843-2bbd017dc956)
-
-<br><br>
-
-**View Playlist**
-
-![Screenshot 2023-06-20 190642](https://github.com/ankitk26/Next-Spotify-v2/assets/53444460/43aa2d51-65ab-44e3-9a47-effcf75d3408)
+The API endpoints and their response are listed in [Spotify Web API Documentation](https://developer.spotify.com/documentation/web-api).
 
 <section id="resources"/>
 
 ## Resources
 
-- [Spotify Web API documentation](https://developer.spotify.com/documentation/web-api)
-- Font used - [Montserrat](https://fonts.google.com/specimen/Montserrat)
-- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/example)
-- [NextAuth.js Spotify Provider](https://next-auth.js.org/providers/spotify)
-- Icons used - [Lucide Icons](https://lucide.dev/)
+- [Better Auth Docs](https://www.better-auth.com/docs/introduction)
+- [Drizzle ORM Docs](https://orm.drizzle.team/docs/overview)
+- [TanStack Query Docs](https://tanstack.com/query/v5/docs/framework/react/overview)
+- [Montserrat Font](https://fonts.google.com/specimen/Montserrat)
+- Icons: [Lucide Icons](https://lucide.dev/)
