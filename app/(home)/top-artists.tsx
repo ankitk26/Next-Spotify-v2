@@ -1,11 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getUserTopTracks } from "@/actions/get-user-top-tracks";
 import ArtistCards from "@/components/artist-cards";
 import CardItemGrid from "@/components/card-item-grid";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { Artist } from "@/types/types";
+import { topArtistsQuery } from "@/lib/queries";
 
 const SKELETON_KEYS = Array.from(
   { length: 15 },
@@ -13,14 +12,7 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function TopArtists() {
-  const { data: topArtists, isPending } = useQuery({
-    queryKey: ["top_artists"],
-    queryFn: () =>
-      getUserTopTracks({
-        limit: 15,
-        type: "artists",
-      }) as Promise<Artist[]>,
-  });
+  const { data: topArtists, isPending } = useQuery(topArtistsQuery());
 
   if (isPending) {
     return (

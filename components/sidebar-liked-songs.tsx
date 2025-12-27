@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getLikedSongs } from "@/actions/get-liked-songs";
+import { likedSongsQuery } from "@/lib/queries";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import SideBarSkeleton from "./sidebar-skeleton";
@@ -13,14 +13,9 @@ export default function SidebarLikedSongs() {
   const pathname = usePathname();
   const library = useSidebarStore((store) => store.library);
 
-  const { data: likedSongsCount, isPending } = useQuery({
-    queryKey: ["liked_songs"],
-    queryFn: getLikedSongs,
-    select: (data) => {
-      return data.total;
-    },
-    enabled: library === "playlists",
-  });
+  const { data: likedSongsCount, isPending } = useQuery(
+    likedSongsQuery(library)
+  );
 
   if (isPending) {
     return <SideBarSkeleton count={1} />;

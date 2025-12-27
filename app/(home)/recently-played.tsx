@@ -1,10 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getRecentlyPlayedTracks } from "@/actions/get-recently-played";
 import CardItemGrid from "@/components/card-item-grid";
 import TrackCards from "@/components/track-cards";
 import { Skeleton } from "@/components/ui/skeleton";
+import { recentlyPlayedQuery } from "@/lib/queries";
 
 const SKELETON_KEYS = Array.from(
   { length: 10 },
@@ -12,10 +12,7 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function RecentlyPlayed() {
-  const { data: recentlyPlayed, isPending } = useQuery({
-    queryKey: ["recently_played"],
-    queryFn: () => getRecentlyPlayedTracks(10),
-  });
+  const { data: recentlyPlayed, isPending } = useQuery(recentlyPlayedQuery());
 
   if (isPending) {
     return (

@@ -3,21 +3,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { Album } from "lucide-react";
 import Image from "next/image";
-import { getUserTopTracks } from "@/actions/get-user-top-tracks";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { Track } from "@/types/types";
+import { userTopTracksQuery } from "@/lib/queries";
 
 const SKELETON_KEYS = Array.from({ length: 9 }, (_, i) => `skeleton-${i}`);
 
 export default function UserTopTracks() {
-  const { data: topTracks, isPending } = useQuery({
-    queryKey: ["user_top_tracks"],
-    queryFn: () =>
-      getUserTopTracks({
-        limit: 9,
-        type: "tracks",
-      }) as Promise<Track[]>,
-  });
+  const { data: topTracks, isPending } = useQuery(userTopTracksQuery(9));
 
   if (isPending) {
     return (

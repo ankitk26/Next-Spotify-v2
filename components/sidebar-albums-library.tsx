@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getUserLibraryAlbums } from "@/actions/get-user-albums";
+import { sidebarAlbumsQuery } from "@/lib/queries";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
@@ -9,11 +9,7 @@ import SideBarSkeleton from "./sidebar-skeleton";
 export default function SidebarAlbumsLibrary() {
   const library = useSidebarStore((store) => store.library);
 
-  const { data, isPending } = useQuery({
-    queryKey: ["sidebar_albums"],
-    queryFn: getUserLibraryAlbums,
-    enabled: library === "albums",
-  });
+  const { data, isPending } = useQuery(sidebarAlbumsQuery(library));
 
   if (library !== "albums") {
     return null;

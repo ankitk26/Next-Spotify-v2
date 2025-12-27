@@ -1,11 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getUserTopTracks } from "@/actions/get-user-top-tracks";
 import CardItemGrid from "@/components/card-item-grid";
 import TrackCards from "@/components/track-cards";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { Track } from "@/types/types";
+import { timeCapsuleQuery } from "@/lib/queries";
 
 const SKELETON_KEYS = Array.from(
   { length: 10 },
@@ -13,15 +12,7 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function TimeCapsule() {
-  const { data: allTimeTopTracks, isPending } = useQuery({
-    queryKey: ["time_capsule"],
-    queryFn: () =>
-      getUserTopTracks({
-        limit: 10,
-        type: "tracks",
-        timeRange: "long_term",
-      }) as Promise<Track[]>,
-  });
+  const { data: allTimeTopTracks, isPending } = useQuery(timeCapsuleQuery());
 
   if (isPending) {
     return (

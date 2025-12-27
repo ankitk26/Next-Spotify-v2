@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUserLibraryPlaylists } from "@/actions/get-user-playlists";
+import { sidebarPlaylistsQuery } from "@/lib/queries";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
@@ -7,11 +7,7 @@ import SideBarSkeleton from "./sidebar-skeleton";
 export default function SidebarUserPlaylists() {
   const library = useSidebarStore((store) => store.library);
 
-  const { data, isPending } = useQuery({
-    queryKey: ["sidebar_playlists"],
-    queryFn: getUserLibraryPlaylists,
-    enabled: library === "playlists",
-  });
+  const { data, isPending } = useQuery(sidebarPlaylistsQuery(library));
 
   if (isPending) {
     return <SideBarSkeleton />;
