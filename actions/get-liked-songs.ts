@@ -30,19 +30,19 @@ export const getLikedSongs = async () => {
     };
   }
 
-  const finalData = { total: data.total, items: data.items };
-  let currUrl = data?.next;
+  // const finalData = { total: data.total, items: data.items };
+  // let currUrl = data?.next;
 
-  while (currUrl !== null) {
-    const nextData = await getRequestWrapper<LikedSongs>(currUrl as string);
+  // while (currUrl !== null) {
+  //   const nextData = await getRequestWrapper<LikedSongs>(currUrl as string);
 
-    if (!nextData) {
-      continue;
-    }
+  //   if (!nextData) {
+  //     continue;
+  //   }
 
-    finalData.items.push(...nextData.items);
-    currUrl = nextData.next;
-  }
+  //   finalData.items.push(...nextData.items);
+  //   currUrl = nextData.next;
+  // }
 
   return {
     total: data.total,
