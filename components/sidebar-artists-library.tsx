@@ -1,7 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { sidebarArtistsQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
@@ -9,7 +8,12 @@ import SideBarSkeleton from "./sidebar-skeleton";
 export default function SidebarArtistsLibrary() {
   const library = useSidebarStore((store) => store.library);
 
-  const { data, isPending } = useQuery(sidebarArtistsQuery(library));
+  const { data, isPending } = trpc.spotify.library.artists.useQuery(
+    undefined,
+    {
+      enabled: library === "artists",
+    }
+  );
 
   if (library !== "artists") {
     return null;

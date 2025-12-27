@@ -1,15 +1,15 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { Album } from "lucide-react";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
-import { userTopTracksQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 const SKELETON_KEYS = Array.from({ length: 9 }, (_, i) => `skeleton-${i}`);
 
 export default function UserTopTracks() {
-  const { data: topTracks, isPending } = useQuery(userTopTracksQuery(9));
+  const { data: topTracks, isPending } =
+    trpc.spotify.user.topTracks.useQuery({ limit: 9 });
 
   if (isPending) {
     return (

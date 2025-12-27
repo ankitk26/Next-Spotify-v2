@@ -1,19 +1,19 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { Dot, Music } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import TracksTable from "@/components/tracks-table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { playlistByIdQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 import PlaylistDescription from "./playlist-description";
 
 export default function PlaylistPage() {
   const params = useParams();
   const playlistId = params.playlistId as string;
 
-  const { data: playlist, isPending } = useQuery(playlistByIdQuery(playlistId));
+  const { data: playlist, isPending } =
+    trpc.spotify.playlist.byId.useQuery({ playlistId });
 
   if (isPending) {
     return (

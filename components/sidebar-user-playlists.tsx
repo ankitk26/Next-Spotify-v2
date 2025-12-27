@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import { sidebarPlaylistsQuery } from "@/lib/queries";
+"use client";
+
+import { trpc } from "@/lib/trpc/react";
 import { useSidebarStore } from "@/stores/sidebar-store";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
@@ -7,7 +8,12 @@ import SideBarSkeleton from "./sidebar-skeleton";
 export default function SidebarUserPlaylists() {
   const library = useSidebarStore((store) => store.library);
 
-  const { data, isPending } = useQuery(sidebarPlaylistsQuery(library));
+  const { data, isPending } = trpc.spotify.library.playlists.useQuery(
+    undefined,
+    {
+      enabled: library === "playlists",
+    }
+  );
 
   if (isPending) {
     return <SideBarSkeleton />;

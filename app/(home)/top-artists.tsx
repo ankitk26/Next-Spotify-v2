@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import ArtistCards from "@/components/artist-cards";
 import CardItemGrid from "@/components/card-item-grid";
 import { Skeleton } from "@/components/ui/skeleton";
-import { topArtistsQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 const SKELETON_KEYS = Array.from(
   { length: 15 },
@@ -12,7 +11,8 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function TopArtists() {
-  const { data: topArtists, isPending } = useQuery(topArtistsQuery());
+  const { data: topArtists, isPending } =
+    trpc.spotify.user.topArtists.useQuery({ limit: 15 });
 
   if (isPending) {
     return (

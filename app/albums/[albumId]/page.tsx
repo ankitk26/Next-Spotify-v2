@@ -1,19 +1,19 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { Dot, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import TracksTable from "@/components/tracks-table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { albumByIdQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 export default function AlbumPage() {
   const params = useParams();
   const albumId = params.albumId as string;
 
-  const { data: album, isPending } = useQuery(albumByIdQuery(albumId));
+  const { data: album, isPending } =
+    trpc.spotify.album.byId.useQuery({ albumId });
 
   if (isPending) {
     return (

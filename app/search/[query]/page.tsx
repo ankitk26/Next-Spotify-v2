@@ -1,21 +1,19 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import AlbumCards from "@/components/album-cards";
 import ArtistCards from "@/components/artist-cards";
 import PlaylistCards from "@/components/playlist-cards";
 import SearchFilters from "@/components/search-filters";
 import TracksTable from "@/components/tracks-table";
-import { searchQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 export default function SearchResults() {
   const params = useParams();
   const query = decodeURIComponent(params.query as string);
 
-  const { data: searchResults, isPending } = useQuery(
-    searchQuery("all", query)
-  );
+  const { data: searchResults, isPending } =
+    trpc.spotify.search.items.useQuery({ type: "all", query, limit: 5 });
 
   if (isPending) {
     return (

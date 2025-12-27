@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import CardItemGrid from "@/components/card-item-grid";
 import TrackCards from "@/components/track-cards";
 import { Skeleton } from "@/components/ui/skeleton";
-import { recentlyPlayedQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 const SKELETON_KEYS = Array.from(
   { length: 10 },
@@ -12,7 +11,8 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function RecentlyPlayed() {
-  const { data: recentlyPlayed, isPending } = useQuery(recentlyPlayedQuery());
+  const { data: recentlyPlayed, isPending } =
+    trpc.spotify.user.recentlyPlayed.useQuery({ limit: 10 });
 
   if (isPending) {
     return (

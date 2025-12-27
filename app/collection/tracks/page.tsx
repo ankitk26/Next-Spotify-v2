@@ -1,18 +1,16 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { Dot } from "lucide-react";
 import Image from "next/image";
 import TracksTable from "@/components/tracks-table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
-import { likedSongsFullQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 export default function LikedTracksPage() {
   const { data: session, isPending: sessionPending } = authClient.useSession();
-  const { data: likedTracks, isPending: tracksPending } = useQuery(
-    likedSongsFullQuery()
-  );
+  const { data: likedTracks, isPending: tracksPending } =
+    trpc.spotify.library.likedSongs.useQuery();
 
   const isPending = sessionPending || tracksPending;
 
