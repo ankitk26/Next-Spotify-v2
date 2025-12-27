@@ -39,7 +39,7 @@ next-spotify-v2 is a simple project built with **React 19** and **Next.js 16** t
 
 - **Authentication**: [Better Auth](https://www.better-auth.com/)
 - **Database ORM**: [Drizzle ORM](https://orm.drizzle.team/)
-- **Database**: [Postgres](https://postgresjs.org/)
+- **Database**: [Postgres](https://postgresjs.org/) - Neon provider
 
 ### State and Data Management
 
