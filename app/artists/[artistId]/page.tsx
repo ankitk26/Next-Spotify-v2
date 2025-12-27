@@ -1,11 +1,10 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { Music } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { artistByIdQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 import ArtistAlbums from "./artist-albums";
 import ArtistAppearsOn from "./artist-appears-on";
 import ArtistCompilation from "./artist-compilation";
@@ -16,7 +15,8 @@ export default function ArtistPage() {
   const params = useParams();
   const artistId = params.artistId as string;
 
-  const { data: artist, isPending } = useQuery(artistByIdQuery(artistId));
+  const { data: artist, isPending } =
+    trpc.spotify.artist.byId.useQuery({ artistId });
 
   if (isPending) {
     return (

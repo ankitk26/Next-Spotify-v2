@@ -1,10 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import CardItemGrid from "@/components/card-item-grid";
 import TrackCards from "@/components/track-cards";
 import { Skeleton } from "@/components/ui/skeleton";
-import { timeCapsuleQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 const SKELETON_KEYS = Array.from(
   { length: 10 },
@@ -12,7 +11,8 @@ const SKELETON_KEYS = Array.from(
 );
 
 export default function TimeCapsule() {
-  const { data: allTimeTopTracks, isPending } = useQuery(timeCapsuleQuery());
+  const { data: allTimeTopTracks, isPending } =
+    trpc.spotify.user.timeCapsule.useQuery({ limit: 10 });
 
   if (isPending) {
     return (

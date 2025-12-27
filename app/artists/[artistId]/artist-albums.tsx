@@ -1,13 +1,11 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import AlbumCards from "@/components/album-cards";
-import { artistAlbumsQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 export default function ArtistAlbums({ artistId }: { artistId: string }) {
-  const { data: artistAlbums, isPending } = useQuery(
-    artistAlbumsQuery(artistId)
-  );
+  const { data: artistAlbums, isPending } =
+    trpc.spotify.artist.albums.useQuery({ artistId });
 
   if (isPending) {
     return null;

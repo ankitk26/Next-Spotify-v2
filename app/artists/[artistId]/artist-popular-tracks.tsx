@@ -1,13 +1,11 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import TracksTable from "@/components/tracks-table";
-import { artistTopTracksQuery } from "@/lib/queries";
+import { trpc } from "@/lib/trpc/react";
 
 export default function ArtistTopTracks({ artistId }: { artistId: string }) {
-  const { data: artistTopTracks, isPending } = useQuery(
-    artistTopTracksQuery(artistId)
-  );
+  const { data: artistTopTracks, isPending } =
+    trpc.spotify.artist.topTracks.useQuery({ artistId });
 
   if (isPending) {
     return null;
