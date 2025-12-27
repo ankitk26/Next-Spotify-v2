@@ -1,6 +1,6 @@
-# next-spotify-v2
+> **Disclaimer**: I am currently building a more advanced project — **[Betterlist](https://github.com/ankitk26/betterlist)** — designed for managing Spotify playlists without any hassle. Check it out for a more refined and smoother experience.
 
-> **Disclaimer**: I am currently building a more advanced project — **[Betterlist](https://github.com/ankitk26/betterlist)** — designed for managing Spotify playlists with ease. Check it out for a more refined experience.
+# next-spotify-v2
 
 <img src="https://images.unsplash.com/photo-1567535343163-9bba0f61bd09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="sample intro image" width="700" />
 
