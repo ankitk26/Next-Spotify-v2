@@ -1,5 +1,5 @@
-import { router, publicProcedure } from "../init";
 import type { Album, Artist, Playlist, Track } from "@/types/types";
+import { publicProcedure, router } from "../init";
 
 type LikedSongs = {
   total: number;
@@ -57,7 +57,6 @@ export const libraryRouter = router({
     const data = await ctx.getRequestWrapper<{ artists: { items: Artist[] } }>(
       "/me/following?type=artist&limit=50"
     );
-    return data?.artists.items;
+    return data?.artists?.items ?? [];
   }),
 });
-

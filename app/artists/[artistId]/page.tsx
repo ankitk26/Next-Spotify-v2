@@ -15,8 +15,9 @@ export default function ArtistPage() {
   const params = useParams();
   const artistId = params.artistId as string;
 
-  const { data: artist, isPending } =
-    trpc.spotify.artist.byId.useQuery({ artistId });
+  const { data: artist, isPending } = trpc.spotify.artist.byId.useQuery({
+    artistId,
+  });
 
   if (isPending) {
     return (

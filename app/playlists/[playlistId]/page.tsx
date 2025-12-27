@@ -12,8 +12,9 @@ export default function PlaylistPage() {
   const params = useParams();
   const playlistId = params.playlistId as string;
 
-  const { data: playlist, isPending } =
-    trpc.spotify.playlist.byId.useQuery({ playlistId });
+  const { data: playlist, isPending } = trpc.spotify.playlist.byId.useQuery({
+    playlistId,
+  });
 
   if (isPending) {
     return (

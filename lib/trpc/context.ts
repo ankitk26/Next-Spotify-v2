@@ -1,11 +1,11 @@
-import { type FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
-import { auth } from "@/lib/auth";
-import { spotifyApiBaseUrl } from "@/constants/constants";
 import { betterFetch } from "@better-fetch/fetch";
+import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
+import { spotifyApiBaseUrl } from "@/constants/constants";
+import { auth } from "@/lib/auth";
 
 export interface Context {
   session: Awaited<ReturnType<typeof auth.api.getSession>>;
-  getRequestWrapper: <T = unknown>(endpoint: string) => Promise<T>;
+  getRequestWrapper: <T = unknown>(endpoint: string) => Promise<T | null>;
 }
 
 export async function createContext(
@@ -40,4 +40,3 @@ export async function createContext(
     getRequestWrapper,
   };
 }
-

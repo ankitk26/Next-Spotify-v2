@@ -4,8 +4,9 @@ import AlbumCards from "@/components/album-cards";
 import { trpc } from "@/lib/trpc/react";
 
 export default function ArtistAlbums({ artistId }: { artistId: string }) {
-  const { data: artistAlbums, isPending } =
-    trpc.spotify.artist.albums.useQuery({ artistId });
+  const { data: artistAlbums, isPending } = trpc.spotify.artist.albums.useQuery(
+    { artistId }
+  );
 
   if (isPending) {
     return null;

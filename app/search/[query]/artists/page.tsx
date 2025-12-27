@@ -9,8 +9,9 @@ export default function ArtistsSearchResultPage() {
   const params = useParams();
   const query = decodeURIComponent(params.query as string);
 
-  const { data: searchResults, isPending } =
-    trpc.spotify.search.items.useQuery({ type: "artist", query, limit: 50 });
+  const { data: searchResults, isPending } = trpc.spotify.search.items.useQuery(
+    { type: "artist", query, limit: 50 }
+  );
 
   if (isPending) {
     return (

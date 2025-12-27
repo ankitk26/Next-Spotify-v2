@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../init";
 import type { Playlist, Track } from "@/types/types";
+import { publicProcedure, router } from "../init";
 
 export const playlistRouter = router({
   byId: publicProcedure
@@ -43,4 +43,3 @@ export const playlistRouter = router({
       return playlist;
     }),
 });
-

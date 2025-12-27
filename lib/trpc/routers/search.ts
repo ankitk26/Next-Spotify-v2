@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../init";
 import type { Album, Artist, Playlist, Track } from "@/types/types";
+import { publicProcedure, router } from "../init";
 
 type SearchResults = {
   tracks: {
@@ -50,4 +50,3 @@ export const searchRouter = router({
       };
     }),
 });
-
