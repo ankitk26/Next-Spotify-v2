@@ -1,33 +1,37 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Music } from "lucide-react";
 import Image from "next/image";
-import type { Metadata } from "next/types";
-import { getArtistById } from "@/actions/get-artist-by-id";
+import { useParams } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
+import { artistByIdQuery } from "@/lib/queries";
 import ArtistAlbums from "./artist-albums";
 import ArtistAppearsOn from "./artist-appears-on";
 import ArtistCompilation from "./artist-compilation";
 import ArtistTopTracks from "./artist-popular-tracks";
 import ArtistSingles from "./artist-singles";
 
-type Props = {
-  params: Promise<{
-    artistId: string;
-  }>;
-};
+export default function ArtistPage() {
+  const params = useParams();
+  const artistId = params.artistId as string;
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const artistId = params.artistId;
-  const artist = await getArtistById(artistId);
-  return {
-    title: `Spotify - ${artist?.name}`,
-  };
-}
+  const { data: artist, isPending } = useQuery(artistByIdQuery(artistId));
 
-export default async function ArtistPage(props: Props) {
-  const params = await props.params;
-  const artistId = params.artistId;
-
-  const artist = await getArtistById(artistId);
+  if (isPending) {
+    return (
+      <div>
+        <div className="flex items-end gap-6">
+          <Skeleton className="h-52 w-52 rounded-full" />
+          <div className="flex flex-col items-start gap-3">
+            <Skeleton className="h-12 w-64" />
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-6 w-48" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

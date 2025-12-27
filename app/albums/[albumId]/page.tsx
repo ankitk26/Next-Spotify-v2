@@ -1,29 +1,32 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Dot, Music } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next/types";
-import { getAlbumById } from "@/actions/get-album-by-id";
+import { useParams } from "next/navigation";
 import TracksTable from "@/components/tracks-table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { albumByIdQuery } from "@/lib/queries";
 
-type Props = {
-  params: Promise<{
-    albumId: string;
-  }>;
-};
+export default function AlbumPage() {
+  const params = useParams();
+  const albumId = params.albumId as string;
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const albumId = params.albumId;
-  const album = await getAlbumById(albumId);
-  return {
-    title: `Spotify - ${album?.name}`,
-  };
-}
+  const { data: album, isPending } = useQuery(albumByIdQuery(albumId));
 
-export default async function AlbumPage(props: Props) {
-  const params = await props.params;
-  const albumId = params.albumId;
-  const album = await getAlbumById(albumId);
+  if (isPending) {
+    return (
+      <div className="flex items-end gap-6">
+        <Skeleton className="aspect-square h-52 w-52 rounded-sm" />
+        <div className="flex flex-col gap-3">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-12 w-64" />
+          <Skeleton className="h-4 w-48" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

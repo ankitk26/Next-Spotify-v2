@@ -1,27 +1,29 @@
-import type { Metadata } from "next/types";
-import { getSearchItems } from "@/actions/get-search-items";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import PlaylistCards from "@/components/playlist-cards";
 import SearchFilters from "@/components/search-filters";
+import { searchQuery } from "@/lib/queries";
 
-interface Props {
-  params: Promise<{
-    query: string;
-  }>;
-}
+export default function PlaylistSearchResultPage() {
+  const params = useParams();
+  const query = decodeURIComponent(params.query as string);
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const query = params.query;
-  return {
-    title: `Playlists related to "${query}"`,
-  };
-}
+  const { data: searchResults, isPending } = useQuery(
+    searchQuery("playlist", query, 50)
+  );
 
-export default async function PlaylistSearchResultPage(props: Props) {
-  const params = await props.params;
-  const query = decodeURI(params.query);
+  if (isPending) {
+    return (
+      <>
+        <SearchFilters />
+        <div>Loading...</div>
+      </>
+    );
+  }
 
-  const playlists = (await getSearchItems("playlist", query, 50)).playlists;
+  const playlists = searchResults?.playlists;
 
   return (
     <>

@@ -1,12 +1,17 @@
-import { getArtistSingles } from "@/actions/get-artist-singles";
-import AlbumCards from "@/components/album-cards";
+"use client";
 
-export default async function ArtistSingles({
-  artistId,
-}: {
-  artistId: string;
-}) {
-  const artistSingles = await getArtistSingles(artistId);
+import { useQuery } from "@tanstack/react-query";
+import AlbumCards from "@/components/album-cards";
+import { artistSinglesQuery } from "@/lib/queries";
+
+export default function ArtistSingles({ artistId }: { artistId: string }) {
+  const { data: artistSingles, isPending } = useQuery(
+    artistSinglesQuery(artistId)
+  );
+
+  if (isPending) {
+    return null;
+  }
 
   if (artistSingles?.length === 0 || !artistSingles) {
     return null;

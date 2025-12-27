@@ -1,12 +1,17 @@
-import { getArtistTopTracks } from "@/actions/get-artist-top-tracks";
-import TracksTable from "@/components/tracks-table";
+"use client";
 
-export default async function ArtistTopTracks({
-  artistId,
-}: {
-  artistId: string;
-}) {
-  const artistTopTracks = await getArtistTopTracks(artistId);
+import { useQuery } from "@tanstack/react-query";
+import TracksTable from "@/components/tracks-table";
+import { artistTopTracksQuery } from "@/lib/queries";
+
+export default function ArtistTopTracks({ artistId }: { artistId: string }) {
+  const { data: artistTopTracks, isPending } = useQuery(
+    artistTopTracksQuery(artistId)
+  );
+
+  if (isPending) {
+    return null;
+  }
 
   if (!artistTopTracks || artistTopTracks.length === 0) {
     return null;

@@ -1,21 +1,33 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Dot } from "lucide-react";
-import type { Metadata } from "next";
-import { headers } from "next/headers";
 import Image from "next/image";
-import { getLikedSongs } from "@/actions/get-liked-songs";
 import TracksTable from "@/components/tracks-table";
-import { auth } from "@/lib/auth";
+import { Skeleton } from "@/components/ui/skeleton";
+import { authClient } from "@/lib/auth-client";
+import { likedSongsFullQuery } from "@/lib/queries";
 
-export const metadata: Metadata = {
-  title: "Spotify - Liked Songs",
-  description: "Songs liked by you",
-};
+export default function LikedTracksPage() {
+  const { data: session, isPending: sessionPending } = authClient.useSession();
+  const { data: likedTracks, isPending: tracksPending } = useQuery(
+    likedSongsFullQuery()
+  );
 
-export default async function LikedTracksPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const likedTracks = await getLikedSongs();
+  const isPending = sessionPending || tracksPending;
+
+  if (isPending) {
+    return (
+      <div className="flex items-end gap-6">
+        <Skeleton className="h-52 w-52 rounded-sm" />
+        <div className="flex flex-col gap-3">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-16 w-64" />
+          <Skeleton className="h-4 w-48" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -33,7 +45,7 @@ export default async function LikedTracksPage() {
 
           <div className="flex items-center font-semibold text-sm">
             <span>{session?.user.name}</span>
-            {likedTracks.total > 0 && (
+            {likedTracks && likedTracks.total > 0 && (
               <>
                 <Dot />
                 <span>{likedTracks.total} songs</span>
@@ -43,7 +55,7 @@ export default async function LikedTracksPage() {
         </div>
       </div>
 
-      {likedTracks.items && (
+      {likedTracks?.items && (
         <TracksTable
           showAlbum
           showCover

@@ -1,8 +1,17 @@
-import { getArtistAlbums } from "@/actions/get-artist-albums";
-import AlbumCards from "@/components/album-cards";
+"use client";
 
-export default async function ArtistAlbums({ artistId }: { artistId: string }) {
-  const artistAlbums = await getArtistAlbums(artistId);
+import { useQuery } from "@tanstack/react-query";
+import AlbumCards from "@/components/album-cards";
+import { artistAlbumsQuery } from "@/lib/queries";
+
+export default function ArtistAlbums({ artistId }: { artistId: string }) {
+  const { data: artistAlbums, isPending } = useQuery(
+    artistAlbumsQuery(artistId)
+  );
+
+  if (isPending) {
+    return null;
+  }
 
   if (artistAlbums?.length === 0 || !artistAlbums) {
     return null;

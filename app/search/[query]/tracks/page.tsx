@@ -1,27 +1,29 @@
-import type { Metadata } from "next/types";
-import { getSearchItems } from "@/actions/get-search-items";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import SearchFilters from "@/components/search-filters";
 import TracksTable from "@/components/tracks-table";
+import { searchQuery } from "@/lib/queries";
 
-interface Props {
-  params: Promise<{
-    query: string;
-  }>;
-}
+export default function TrackSearchResultPage() {
+  const params = useParams();
+  const query = decodeURIComponent(params.query as string);
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const query = params.query;
-  return {
-    title: `Tracks related to "${query}"`,
-  };
-}
+  const { data: searchResults, isPending } = useQuery(
+    searchQuery("track", query, 50)
+  );
 
-export default async function TrackSearchResultPage(props: Props) {
-  const params = await props.params;
-  const query = decodeURI(params.query);
+  if (isPending) {
+    return (
+      <>
+        <SearchFilters />
+        <div>Loading...</div>
+      </>
+    );
+  }
 
-  const tracks = (await getSearchItems("track", query, 50)).tracks;
+  const tracks = searchResults?.tracks;
 
   return (
     <>

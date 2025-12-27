@@ -1,12 +1,17 @@
-import { getArtistAppearsOnAlbums } from "@/actions/get-artist-appears-on-albums";
-import AlbumCards from "@/components/album-cards";
+"use client";
 
-export default async function ArtistAppearsOn({
-  artistId,
-}: {
-  artistId: string;
-}) {
-  const artistAppearsOnAlbums = await getArtistAppearsOnAlbums(artistId);
+import { useQuery } from "@tanstack/react-query";
+import AlbumCards from "@/components/album-cards";
+import { artistAppearsOnQuery } from "@/lib/queries";
+
+export default function ArtistAppearsOn({ artistId }: { artistId: string }) {
+  const { data: artistAppearsOnAlbums, isPending } = useQuery(
+    artistAppearsOnQuery(artistId)
+  );
+
+  if (isPending) {
+    return null;
+  }
 
   if (artistAppearsOnAlbums?.length === 0 || !artistAppearsOnAlbums) {
     return null;

@@ -1,31 +1,30 @@
-import type { Metadata } from "next";
-import { getSearchItems } from "@/actions/get-search-items";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import AlbumCards from "@/components/album-cards";
 import ArtistCards from "@/components/artist-cards";
 import PlaylistCards from "@/components/playlist-cards";
 import SearchFilters from "@/components/search-filters";
 import TracksTable from "@/components/tracks-table";
+import { searchQuery } from "@/lib/queries";
 
-interface Props {
-  params: Promise<{
-    query: string;
-  }>;
-}
+export default function SearchResults() {
+  const params = useParams();
+  const query = decodeURIComponent(params.query as string);
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const query = decodeURIComponent(params.query);
+  const { data: searchResults, isPending } = useQuery(
+    searchQuery("all", query)
+  );
 
-  return {
-    title: `Search results for "${query}"`,
-  };
-}
-
-export default async function SearchResults(props: Props) {
-  const params = await props.params;
-  const query = decodeURI(params.query);
-
-  const searchResults = await getSearchItems("all", query);
+  if (isPending) {
+    return (
+      <div className="flex flex-col items-stretch gap-8">
+        <SearchFilters />
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   if (!searchResults) {
     return <div className="flex flex-col items-stretch gap-8">No results</div>;

@@ -1,29 +1,32 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Dot, Music } from "lucide-react";
 import Image from "next/image";
-import type { Metadata } from "next/types";
-import { getPlaylistById } from "@/actions/get-playlist-by-id";
+import { useParams } from "next/navigation";
 import TracksTable from "@/components/tracks-table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { playlistByIdQuery } from "@/lib/queries";
 import PlaylistDescription from "./playlist-description";
 
-type Props = {
-  params: Promise<{
-    playlistId: string;
-  }>;
-};
+export default function PlaylistPage() {
+  const params = useParams();
+  const playlistId = params.playlistId as string;
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const playlistId = params.playlistId;
-  const playlist = await getPlaylistById(playlistId);
-  return {
-    title: `Spotify - ${playlist?.name}`,
-  };
-}
+  const { data: playlist, isPending } = useQuery(playlistByIdQuery(playlistId));
 
-export default async function PlaylistPage(props: Props) {
-  const params = await props.params;
-  const playlistId = params.playlistId;
-  const playlist = await getPlaylistById(playlistId);
+  if (isPending) {
+    return (
+      <div className="flex items-end gap-6">
+        <Skeleton className="h-60 w-60 rounded-sm" />
+        <div className="flex flex-col gap-3">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-16 w-64" />
+          <Skeleton className="h-4 w-48" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
