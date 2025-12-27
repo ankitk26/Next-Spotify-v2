@@ -1,13 +1,41 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { getUserTopTracks } from "@/actions/get-user-top-tracks";
+import CardItemGrid from "@/components/card-item-grid";
 import TrackCards from "@/components/track-cards";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { Track } from "@/types/types";
 
-export default async function TimeCapsule() {
-  const allTimeTopTracks = (await getUserTopTracks({
-    limit: 10,
-    type: "tracks",
-    timeRange: "long_term",
-  })) as Track[];
+const SKELETON_KEYS = Array.from(
+  { length: 10 },
+  (_, i) => `time-capsule-skeleton-${i}`
+);
 
-  return <TrackCards tracks={allTimeTopTracks} />;
+export default function TimeCapsule() {
+  const { data: allTimeTopTracks, isPending } = useQuery({
+    queryKey: ["time_capsule"],
+    queryFn: () =>
+      getUserTopTracks({
+        limit: 10,
+        type: "tracks",
+        timeRange: "long_term",
+      }) as Promise<Track[]>,
+  });
+
+  if (isPending) {
+    return (
+      <CardItemGrid>
+        {SKELETON_KEYS.map((key) => (
+          <div className="h-full rounded-lg bg-neutral-800 p-4" key={key}>
+            <Skeleton className="aspect-square w-full rounded-md" />
+            <Skeleton className="mt-5 h-5 w-3/4" />
+            <Skeleton className="mt-1 h-4 w-1/2" />
+          </div>
+        ))}
+      </CardItemGrid>
+    );
+  }
+
+  return <TrackCards tracks={allTimeTopTracks ?? []} />;
 }

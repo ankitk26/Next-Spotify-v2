@@ -3,5 +3,9 @@ export default function CardItemGrid({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="grid grid-cols-5 items-stretch">{children}</div>;
+  return (
+    <div className="grid w-full grid-cols-5 items-stretch gap-5">
+      {children}
+    </div>
+  );
 }

@@ -1,13 +1,39 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { Album } from "lucide-react";
 import Image from "next/image";
 import { getUserTopTracks } from "@/actions/get-user-top-tracks";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { Track } from "@/types/types";
 
-export default async function UserTopTracks() {
-  const topTracks = (await getUserTopTracks({
-    limit: 9,
-    type: "tracks",
-  })) as Track[];
+const SKELETON_KEYS = Array.from({ length: 9 }, (_, i) => `skeleton-${i}`);
+
+export default function UserTopTracks() {
+  const { data: topTracks, isPending } = useQuery({
+    queryKey: ["user_top_tracks"],
+    queryFn: () =>
+      getUserTopTracks({
+        limit: 9,
+        type: "tracks",
+      }) as Promise<Track[]>,
+  });
+
+  if (isPending) {
+    return (
+      <div className="grid w-full grid-cols-12 gap-4">
+        {SKELETON_KEYS.map((key) => (
+          <div
+            className="col-span-4 flex items-center gap-4 rounded-md bg-neutral-800 pr-4"
+            key={key}
+          >
+            <Skeleton className="h-[72px] w-[72px] rounded-tl-md rounded-bl-md" />
+            <Skeleton className="h-5 w-32" />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="grid w-full grid-cols-12 gap-4">
