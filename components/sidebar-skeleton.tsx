@@ -2,12 +2,12 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { useSidebarStore } from "@/stores/sidebar-store";
+import { useAppStore } from "@/stores/app-store";
 
 export default function SideBarSkeleton(
   { count }: { count?: number } = { count: 3 }
 ) {
-  const library = useSidebarStore((store) => store.library);
+  const library = useAppStore((store) => store.library);
 
   return (
     <div className="mt-4 flex flex-col items-stretch gap-3">

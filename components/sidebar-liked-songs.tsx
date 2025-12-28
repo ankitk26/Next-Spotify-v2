@@ -5,12 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { trpc } from "@/lib/trpc/react";
 import { cn } from "@/lib/utils";
-import { useSidebarStore } from "@/stores/sidebar-store";
+import { useAppStore } from "@/stores/app-store";
 import SideBarSkeleton from "./sidebar-skeleton";
 
 export default function SidebarLikedSongs() {
   const pathname = usePathname();
-  const library = useSidebarStore((store) => store.library);
+  const library = useAppStore((store) => store.library);
 
   const { data: likedSongsCount, isPending } =
     trpc.spotify.library.likedSongs.useQuery(undefined, {

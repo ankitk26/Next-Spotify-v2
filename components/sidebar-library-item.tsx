@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import type { SidebarLibrary } from "@/stores/sidebar-store";
-import type { Album, Artist, Playlist } from "@/types/types";
+import type { Album, Artist, Playlist, SidebarLibrary } from "@/types/types";
 
 interface Props {
   type: SidebarLibrary;

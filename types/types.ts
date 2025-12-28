@@ -92,3 +92,5 @@ export interface TrackAnalysis {
   tempo: number;
   valence: number;
 }
+
+export type SidebarLibrary = "playlists" | "albums" | "artists";

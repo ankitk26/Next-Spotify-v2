@@ -1,10 +1,11 @@
 import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { setSearchInput, useGlobalStore } from "@/stores/global-store";
+import { useAppStore } from "@/stores/app-store";
 
 export default function SearchInput() {
   const router = useRouter();
-  const searchInput = useGlobalStore((store) => store.searchInput);
+  const searchInput = useAppStore((store) => store.searchInput);
+  const setSearchInput = useAppStore((store) => store.setSearchInput);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,12 +1,12 @@
 "use client";
 
 import { trpc } from "@/lib/trpc/react";
-import { useSidebarStore } from "@/stores/sidebar-store";
+import { useAppStore } from "@/stores/app-store";
 import SidebarLibraryItem from "./sidebar-library-item";
 import SideBarSkeleton from "./sidebar-skeleton";
 
 export default function SidebarAlbumsLibrary() {
-  const library = useSidebarStore((store) => store.library);
+  const library = useAppStore((store) => store.library);
 
   const { data, isPending } = trpc.spotify.library.albums.useQuery(undefined, {
     enabled: library === "albums",

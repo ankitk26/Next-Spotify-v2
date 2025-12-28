@@ -1,14 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import {
-  type SidebarLibrary,
-  updateSidebarLibrary,
-  useSidebarStore,
-} from "@/stores/sidebar-store";
+import { useAppStore } from "@/stores/app-store";
+import type { SidebarLibrary } from "@/types/types";
 
 export default function LibraryBadge({ type }: { type: SidebarLibrary }) {
-  const library = useSidebarStore((store) => store.library);
+  const library = useAppStore((store) => store.library);
+  const setSidebarLibrary = useAppStore((store) => store.setSidebarLibrary);
 
   return (
     <button
@@ -18,7 +16,7 @@ export default function LibraryBadge({ type }: { type: SidebarLibrary }) {
           ? "bg-white text-neutral-900"
           : "bg-neutral-800 text-white hover:bg-neutral-600"
       )}
-      onClick={() => updateSidebarLibrary(type)}
+      onClick={() => setSidebarLibrary(type)}
       type="button"
     >
       {type[0].toUpperCase().concat(type.substring(1))}
