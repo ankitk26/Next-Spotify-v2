@@ -12,7 +12,7 @@ next-spotify-v2 is a simple project built with **React 19** and **Next.js 16** t
 
 > **Note**: Currently, users cannot log in to the demo link due to Spotify's API Developer quota limits. The application is intended for local development and testing.
 >
-> **Working Demo**: [Vercel Link](https://next-spotify-smoky-v2.vercel.app)
+> **Working Demo**: [Vercel Link](https://next-spotify-app-router.vercel.app)
 
 ---
 
@@ -69,8 +69,8 @@ Since Spotify's Redirect URIs often require HTTPS for authentication, you must u
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/ankitk26/next-spotify-v2.git
-cd next-spotify-v2
+git clone https://github.com/ankitk26/next-spotify-app-router.git
+cd next-spotify-app-router
 npm install
 ```
 
